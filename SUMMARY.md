@@ -7,5 +7,6 @@
 * [Lambdas](lambdas.md)
 * [One Liners](one_liners.md)
 * [Enumerate](enumerate.md)
-* [Map & Filter ](map_&_filter.md)
+* [Map & Filter](map_&_filter.md)
+* Function caching
 

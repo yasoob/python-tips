@@ -52,3 +52,4 @@ python -c "import csv,json;print json.dumps(list(csv.reader(open('csv_file.csv')
 
 Make sure that you replace `csv_file.csv` to the relevant file name.
 
+A couple of more one liners can be found on the [Python website](https://wiki.python.org/moin/Powerful%20Python%20One-Liners)

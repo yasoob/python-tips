@@ -2,5 +2,5 @@
 
 * [introduction](README.md)
 * [Ternary Operators](chapter1.md)
-* [Logging](chapter2.md)
+* [Decorators](chapter2.md)
 

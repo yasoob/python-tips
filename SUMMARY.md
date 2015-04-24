@@ -9,5 +9,5 @@
 * [Enumerate](enumerate.md)
 * [Map & Filter](map_&_filter.md)
 * [Function caching](function_caching.md)
-* Object introspection
+* [Object introspection](object_introspection.md)
 

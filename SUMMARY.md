@@ -7,4 +7,5 @@
 * [Lambdas](lambdas.md)
 * [One Liners](one_liners.md)
 * [Enumerate](enumerate.md)
+* Map - Filter - Reduce
 

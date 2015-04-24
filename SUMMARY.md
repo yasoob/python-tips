@@ -1,6 +1,6 @@
 # Summary
 
 * [introduction](README.md)
-* [First Chapter](chapter1.md)
-* Logging
+* [Ternary Operators](chapter1.md)
+* [Logging](chapter2.md)
 

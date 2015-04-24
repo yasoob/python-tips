@@ -8,13 +8,13 @@ __Blueprint :__
 def decorator_name(f):
     def decorate(*args, **kwargs):
         if not can_run:
-            return "Kindly authenticate"
+            return "Function will not run"
         return f(*args, **kwargs)
     return decorated
 
 @decorator_name
 def func():
-    print "lola"
+    print "Function is running"
 
 can_run = True
 print func()

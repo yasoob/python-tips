@@ -17,4 +17,4 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 ```
-__Usage :__
+__Example :__

@@ -55,10 +55,12 @@ As the name suggests, filter creats a list of elements for which a function retu
 
 ```python
 number_list = range(-5,5)
-less_than_zero = filter(lambda x: x<0, number_list)
+less_than_zero = list(filter(lambda x: x<0, number_list))
 print(less_than_zero)
 
 # Output: [-5, -4, -3, -2, -1]
 ```
 
 The filter resembles a for loop but it is a builtin function and faster.
+
+__Note:__ If map & filter do not appear beautiful to you then you can read about `list/dict/tuple` comprehensions.

@@ -6,5 +6,5 @@
 * [Python Modules in C](python_modules_in_c.md)
 * [Lambdas](lambdas.md)
 * [One Liners](one_liners.md)
-* Enumerate
+* [Enumerate](enumerate.md)
 

@@ -5,5 +5,5 @@
 * [Decorators](chapter2.md)
 * [Python Modules in C](python_modules_in_c.md)
 * [Lambdas](lambdas.md)
-* One Liners
+* [One Liners](one_liners.md)
 

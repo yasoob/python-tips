@@ -3,5 +3,5 @@
 * [introduction](README.md)
 * [Ternary Operators](chapter1.md)
 * [Decorators](chapter2.md)
-* Python Modules in C
+* [Python Modules in C](python_modules_in_c.md)
 

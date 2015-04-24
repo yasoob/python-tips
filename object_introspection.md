@@ -18,3 +18,7 @@ dir(my_list)
 # '__subclasshook__', 'append', 'count', 'extend', 'index', 'insert', 'pop', 
 # 'remove', 'reverse', 'sort']
 ```
+
+Our introspection gave us the names of all the methods of a list. This can be handy when you are not able to recall a method name. If we run `dir()` without any argument then it returns all names in the current scope.
+
+There are a couple of other methods as well which help in introspection. You can explore them if you wish.

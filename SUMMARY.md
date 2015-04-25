@@ -20,4 +20,5 @@
 * [Set - Data Structure](set_-_data_structure.md)
 * [Open function](open_function.md)
 * [Global & Return](global_&_return.md)
+* Collections
 

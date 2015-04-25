@@ -167,4 +167,5 @@ print(d)
 
 ```
 
+This was just a quick drive through the `collections` module. Make sure you read the official documentation after reading this.
 

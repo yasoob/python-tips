@@ -17,9 +17,9 @@
 * [Targeting Python 2+3](targeting_python_2_3.md)
 * [Comprehensions](comprehensions.md)
 * [Generators](generators.md)
+* [__slot__ magic](__slots__magic.md)
 * [Set - Data Structure](set_-_data_structure.md)
 * [Open function](open_function.md)
 * [Global & Return](global_&_return.md)
 * [Collections](collections.md)
-* [__slot__ magic](__slots__magic.md)
 

@@ -54,7 +54,11 @@ mcase_frequency = { k.lower() : mcase.get(k.lower(), 0) + mcase.get(k.upper(), 0
 # mcase_frequency == {'a': 17, 'z': 3, 'b': 34}
 ```
 
-In the above example we are combining the values of keys which are same but in different typecase. I personally do not use `dict` comprehensions a lot.
+In the above example we are combining the values of keys which are same but in different typecase. I personally do not use `dict` comprehensions a lot. You can also quickly reverse a dictionary:
+
+```python
+{v: k for k, v in some_dict.items()}
+```
 
 ####`set` comprehensions
 

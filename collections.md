@@ -94,7 +94,7 @@ print(favs)
 # })
 ```
 
-We can also count the most common lines in a file using it as well. For example:
+We can also count the most common lines in a file using it. For example:
 
 ```python
 with open('filename', 'rb') as f:

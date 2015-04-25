@@ -13,5 +13,5 @@
 * [Virtual Environment](virtual_environment.md)
 * [\*args and **kwargs](args_and_kwargs.md)
 * [Exceptions](exceptions.md)
-* Debugging
+* [Debugging](debugging.md)
 

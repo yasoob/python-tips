@@ -11,7 +11,7 @@
 * [Function caching](function_caching.md)
 * [Object introspection](object_introspection.md)
 * [Virtual Environment](virtual_environment.md)
-* [\*args and **kwargs](args_and_kwargs.md)
+* [*args and **kwargs](args_and_kwargs.md)
 * [Exceptions](exceptions.md)
 * [Debugging](debugging.md)
 * [Targeting Python 2+3](targeting_python_2_3.md)

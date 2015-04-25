@@ -12,4 +12,5 @@
 * [Object introspection](object_introspection.md)
 * [Virtual Environment](virtual_environment.md)
 * [*args and **kwargs](args_and_kwargs.md)
+* Exceptions
 

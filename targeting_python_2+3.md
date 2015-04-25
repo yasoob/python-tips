@@ -75,4 +75,12 @@ apply()
 # Output: NameError: obsolete Python 2 builtin apply is disabled
 ```
 
+__External standard-library backports__
+
+There are a few packages in the wild which provide Python 3 functionality in Python 2. For instance we have:
+
+- enum `pip install enum34`
+- singledispatch `pip install singledispatch`
+- pathlib `pip install pathlib`
+
 I am sure there are a lot of other methods and tricks which can be used to make you code compatible with both of these Python series. This was just to give you some ideas.

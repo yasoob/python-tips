@@ -18,5 +18,5 @@
 * [Comprehensions](comprehensions.md)
 * [Generators](generators.md)
 * [Set - Data Structure](set_-_data_structure.md)
-* Open function
+* [Open function](open_function.md)
 

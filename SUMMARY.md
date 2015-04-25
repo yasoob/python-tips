@@ -15,4 +15,5 @@
 * [Exceptions](exceptions.md)
 * [Debugging](debugging.md)
 * [Targeting Python 2+3](targeting_python_2_3.md)
+* Comprehensions
 

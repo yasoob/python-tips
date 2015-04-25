@@ -17,5 +17,5 @@
 * [Targeting Python 2+3](targeting_python_2_3.md)
 * [Comprehensions](comprehensions.md)
 * [Generators](generators.md)
-* Set - Data Structure
+* [Set - Data Structure](set_-_data_structure.md)
 

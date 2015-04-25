@@ -1,2 +1,39 @@
 ## Collections
 
+Python ships with a module that contains a number of container data types called Collections. We will talk about a few of them and discuss their usefullness.
+
+The ones which we will talk about are:
+
+- `defaultdict`
+- `counter`
+- `deque`
+
+####1.`defaultdict`
+
+I personally use defaultdict quite a bit. One very important use case is when you are appending to ists inside a dictionary. If a `key` is not already present in the dictionary then you are greeted with a `KeyError`. `defaultdict` allows us to circumvent this issue in a neat way. First let me share an example using `dict` which raises `KeyError` and then I will share a solution using `defaultdict`.
+
+__Problem:__
+
+```python
+some_dict = {}
+some_dict['colours']['favourite'] = "yellow"
+# Raises KeyError: 'colours'
+```
+
+__Solution:__
+
+```python
+import collections
+tree = lambda: collections.defaultdict(tree)
+some_dict = tree()
+some_dict['colours']['favourite'] = "yellow"
+# Works fine
+```
+
+You can print the `some_dict` using `json.dumps`. Here is some sample code:
+
+```python
+import json
+print(json.dumps(some_dict))
+# Output: {"colours": {"favourite": "yellow"}}
+```

@@ -14,5 +14,5 @@
 * [\*args and **kwargs](args_and_kwargs.md)
 * [Exceptions](exceptions.md)
 * [Debugging](debugging.md)
-* [Targeting Python 2+3](targeting_python_2+3.md)
+* [Targeting Python 2+3](targeting_python_2_3.md)
 

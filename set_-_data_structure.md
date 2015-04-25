@@ -32,7 +32,7 @@ You can intersect two sets. For instance:
 ```python
 valid = set(['yellow', 'red', 'blue', 'green', 'black'])
 input = set(['red', 'brown'])
-print input.intersection(valid)
+print(input.intersection(valid))
 # Output: set(['red'])
 ```
 
@@ -43,8 +43,15 @@ You can find the invalid values in the above example using the difference method
 ```python
 valid = set(['yellow', 'red', 'blue', 'green', 'black'])
 input = set(['red', 'brown'])
-print input.difference(valid)
+print(input.difference(valid))
 # Output: set(['brown'])
 ```
 
+You can also create sets using the new notation:
+
+```python
+a_set = {'red', 'blue', 'green'}
+print(type(a_set))
+# Output: <type 'set'>
+```
 There are a few other methods as well. I would recommend visiting the official documentation and giving it a quick read.

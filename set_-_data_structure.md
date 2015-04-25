@@ -26,3 +26,25 @@ print(duplicates)
 Sets also have a few other methods. Below are some of them.
 
 __Intersection__
+
+You can intersect two sets. For instance:
+
+```python
+valid = set(['yellow', 'red', 'blue', 'green', 'black'])
+input = set(['red', 'brown'])
+print input.intersection(valid)
+# Output: set(['red'])
+```
+
+__Difference__
+
+You can find the invalid values in the above example using the difference method. For example:
+
+```python
+valid = set(['yellow', 'red', 'blue', 'green', 'black'])
+input = set(['red', 'brown'])
+print input.difference(valid)
+# Output: set(['brown'])
+```
+
+There are a few other methods as well. I would recommend visiting the official documentation and giving it a quick read.

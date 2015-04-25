@@ -21,5 +21,5 @@
 * [Open function](open_function.md)
 * [Global & Return](global_&_return.md)
 * [Collections](collections.md)
-* [Super Function](super_function.md)
+* [__slot__ magic](__slots__magic.md)
 

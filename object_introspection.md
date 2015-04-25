@@ -1,7 +1,8 @@
 ## Object introspection
 
-In computer programming, introspection is the ability to determine the type of an object at runtime. It is one of Python's strengths. Everything in Python is an object and we can examine those objects. Python provides us with a few Built-in functions to help us.
+In computer programming, introspection is the ability to determine the type of an object at runtime. It is one of Python's strengths. Everything in Python is an object and we can examine those objects. Python ships with a few Built-in functions and modules to help us.
 
+####1.`dir()` BIF
 In this section we will learn about `dir()` and how it facilitates us in introspection.
 
 It is one of the most important functions for introspection. It returns a list of attributes and methods belonging to an object. Here is an example:
@@ -20,5 +21,44 @@ dir(my_list)
 ```
 
 Our introspection gave us the names of all the methods of a list. This can be handy when you are not able to recall a method name. If we run `dir()` without any argument then it returns all names in the current scope.
+
+####2.`type()` and `id()`
+
+The `type` function returns the type of an object. For example:
+
+```python
+print(type(''))
+# Output: <type 'str'>
+
+print(type([]))
+# Output: <type 'list'>
+
+print(type({}))
+# Output: <type 'dict'>
+
+print(type(bool))
+# Output: <type 'type'>
+
+print(type(3))
+# Output: <type 'int'>
+```
+
+`id` returns the unique ids of various objects. For instance:
+
+```python
+name = "Yasoob"
+print(id(name))
+# Output: 139972439030304
+```
+
+####3.`inspect` module
+
+The inspect module also provides several useful functions to get information about live objects. For example you can check the members of an object by running:
+
+```python
+import inspect
+print(inspect.getmembers(str))
+# Output: [('__add__', <slot wrapper '__add__' of ... ...
+```
 
 There are a couple of other methods as well which help in introspection. You can explore them if you wish.

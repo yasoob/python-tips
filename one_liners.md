@@ -52,4 +52,13 @@ python -c "import csv,json;print json.dumps(list(csv.reader(open('csv_file.csv')
 
 Make sure that you replace `csv_file.csv` to the relevant file name.
 
+__List Flattening__
+
+You can quickly and easily flatten a list using `itertools.chain.from_iterable` from the `itertools` package. Here is a simple example:
+
+```python
+a_list = [[1, 2], [3, 4], [5, 6]]
+print(list(itertools.chain.from_iterable(a_list)))
+# Output: [1, 2, 3, 4, 5, 6]
+```
 A couple of more one liners can be found on the [Python website](https://wiki.python.org/moin/Powerful%20Python%20One-Liners)

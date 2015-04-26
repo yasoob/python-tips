@@ -23,4 +23,5 @@
 * [Collections](collections.md)
 * [__slot__ magic](__slots__magic.md)
 * [For - Else](for_-_else.md)
+* Coroutines
 

@@ -24,5 +24,5 @@
 * [__slot__ magic](__slots__magic.md)
 * [For - Else](for_-_else.md)
 * [Coroutines](coroutines.md)
-* Mutation
+* [Mutation](mutation.md)
 

@@ -102,3 +102,11 @@ new = NewClass()
 This inheritance from `object` allows new style classes to utilize some _magic_. A major advantage is that you can employ some useful optimizations like `__slots__`. You can use `super()` and descriptors and the likes. Bottom line? Always try to use new-style classes.
 
 __Note:__ Python 3 only has new-style classes. It does not matter whether you subclass from `object` or not. However it is recommended that you still subclass from `object`.
+
+####3.Magic Methods:
+
+Python's classes are famous for their magic methods, commonly called __dunder__ methods. I am going to discuss a few of them.
+
+- `__getitem__` 
+
+Implementing __getitem__ in a class allows its instances to use the [] (indexer) operator. 

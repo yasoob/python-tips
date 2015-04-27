@@ -25,5 +25,5 @@
 * [For - Else](for_-_else.md)
 * [Coroutines](coroutines.md)
 * [Mutation](mutation.md)
-* Classes
+* [Classes](classes.md)
 

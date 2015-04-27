@@ -74,7 +74,7 @@ foo.superpowers
 
 That is the beauty of the wrong usage of mutable class variables. To make your code safe against this kind of surprize attacks then make sure that you do not use mutable class variables. You may use them only if you know what you are doing.
 
-####New style classes:
+####2.New style classes:
 
 New style classes were introduced in Python 2.1 but a lot of people do not know about them even now! It is so because Python also supports old style classes just to maintain backward compatibility. I have said a lot about new and old but I have not told you about the difference. Well the major difference is that:
 

@@ -101,4 +101,4 @@ new = NewClass()
 
 This inheritance from `object` allows new style classes to utilize some _magic_. A major advantage is that you can employ some useful optimizations like `__slots__`. You can use `super()` and descriptors and the likes. Bottom line? Always try to use new-style classes.
 
-__Note:__ Python 3 only has new-style classes. However it is recommended that you still subclass `object`.
+__Note:__ Python 3 only has new-style classes. It does not matter whether you subclass `object` or not. However it is recommended that you still subclass `object`.

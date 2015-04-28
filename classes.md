@@ -74,7 +74,7 @@ foo.superpowers
 
 That is the beauty of the wrong usage of mutable class variables. To make your code safe against this kind of surprize attacks then make sure that you do not use mutable class variables. You may use them only if you know what you are doing.
 
-####New style classes:
+####2.New style classes:
 
 New style classes were introduced in Python 2.1 but a lot of people do not know about them even now! It is so because Python also supports old style classes just to maintain backward compatibility. I have said a lot about new and old but I have not told you about the difference. Well the major difference is that:
 
@@ -102,3 +102,83 @@ new = NewClass()
 This inheritance from `object` allows new style classes to utilize some _magic_. A major advantage is that you can employ some useful optimizations like `__slots__`. You can use `super()` and descriptors and the likes. Bottom line? Always try to use new-style classes.
 
 __Note:__ Python 3 only has new-style classes. It does not matter whether you subclass from `object` or not. However it is recommended that you still subclass from `object`.
+
+####3.Magic Methods:
+
+Python's classes are famous for their magic methods, commonly called __dunder__ methods. I am going to discuss a few of them.
+
+- `__init__`
+
+It is a class innitializer. Whenever an instance of a class is created it's `__init__` method. For instance:
+
+```python
+class GetTest(object):
+    def __init__(self):
+        print('Greetings!!')
+    def another_method(self):
+        print('I am another method which is not'
+              ' automatically called')
+
+a = GetTest()
+# Output: Greetings!!
+
+a.another_method()
+# Output: I am another method which is not automatically 
+# called
+```
+
+You can see that `__init__` is called immediately after an instance is created. You can also pass arguments to the class during it's innitialization. Like this:
+
+```python
+class GetTest(object):
+    def __init__(self, name):
+        print('Greetings!! {0}'.format(name))
+    def another_method(self):
+        print('I am another method which is not'
+              ' automatically called')
+
+a = GetTest('yasoob')
+# Output: Greetings!! yasoob
+
+# Try creating an instance without the name arguments
+b = GetTest()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: __init__() takes exactly 2 arguments (1 given)
+```
+
+I am sure that now you understand the `__init__` method.
+
+- `__getitem__` 
+
+Implementing __getitem__ in a class allows its instances to use the [] (indexer) operator. Here is an example:
+
+```python
+class GetTest(object):
+    def __init__(self):
+        self.info = {
+            'name':'Yasoob',
+            'country':'Pakistan',
+            'number':12345812
+        }
+        
+    def __getitem__(self,i):
+        return self.info[i]
+
+foo = OldClass()
+foo['title']
+# Output: 'Yasoob'
+
+foo['number']
+# Output: 36845124
+```
+
+Without the `__getitem__` method we would have got this error:
+
+```python
+>>> foo['title']
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'GetTest' object has no attribute '__getitem__'
+```

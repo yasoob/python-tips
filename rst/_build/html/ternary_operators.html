@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Ternary Operators &mdash; Python Tips 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Python Tips 0.1 documentation" href="index.html" />
+    <link rel="next" title="Decorators" href="decorators.html" />
+    <link rel="prev" title="set Data Structure" href="set_-_data_structure.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="decorators.html" title="Decorators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="set_-_data_structure.html" title="set Data Structure"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Python Tips 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ternary-operators">
+<h1>Ternary Operators<a class="headerlink" href="#ternary-operators" title="Permalink to this headline">¶</a></h1>
+<p>Ternary operators are more commonly known as conditional expressions in
+Python. These operators evaluate something based on a condition being
+true or not. They became a part of Python in version 2.4</p>
+<p>Here is a blueprint and an example of using these conditional
+expressions.</p>
+<p><strong>Blueprint:</strong></p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">condition_is_true</span> <span class="k">if</span> <span class="n">condition_true</span> <span class="k">else</span> <span class="n">condition_is_false</span>
+</pre></div>
+</div>
+<p><strong>Example:</strong></p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">is_fat</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">state</span> <span class="o">=</span> <span class="s">&quot;fat&quot;</span> <span class="k">if</span> <span class="n">is_fat</span> <span class="k">else</span> <span class="s">&quot;not fat&quot;</span>
+</pre></div>
+</div>
+<p>It allows to quickly test a condition instead of a multiline if
+statement. Often times it can be immensely helpful and can make your
+code compact but still maintainable.</p>
+<p>Another more obscure and not widely used example involves tuples. Here
+is some sample code:</p>
+<p><strong>Blueprint:</strong></p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="p">(</span><span class="n">if_test_is_false</span><span class="p">,</span> <span class="n">if_test_is_true</span><span class="p">)[</span><span class="n">test</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Example:</strong></p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">fat</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">fitness</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;skinny&quot;</span><span class="p">,</span><span class="s">&quot;fat&quot;</span><span class="p">)[</span><span class="n">fat</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Ali is &quot;</span> <span class="o">+</span> <span class="n">fitness</span><span class="p">)</span>
+<span class="c"># Output: Ali is fat</span>
+</pre></div>
+</div>
+<p>The above example is not widely used and is generally disliked by
+Pythonistas for not being Pythonic. It is also easy to confuse where to
+put the true value and where to put the false value in the tuple.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="set_-_data_structure.html" title="previous chapter"><tt class="docutils literal"><span class="pre">set</span></tt> Data Structure</a></li>
+      <li>Next: <a href="decorators.html" title="next chapter">Decorators</a></li>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/ternary_operators.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2015, Muhammad Yasoob Ullah Khalid.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Coroutines &mdash; Python Tips 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Python Tips 0.1 documentation" href="index.html" />
+    <link rel="next" title="Function caching" href="function_caching.html" />
+    <link rel="prev" title="Targeting Python 2+3" href="targeting_python_2_3.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="function_caching.html" title="Function caching"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="targeting_python_2_3.html" title="Targeting Python 2+3"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Python Tips 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="coroutines">
+<h1>Coroutines<a class="headerlink" href="#coroutines" title="Permalink to this headline">¶</a></h1>
+<p>Coroutines are similar to generators with a few differences. The main
+differences are:</p>
+<ul class="simple">
+<li>generators are data producers</li>
+<li>coroutines are data consumers</li>
+</ul>
+<p>First of all let&#8217;s review the generator creation process. We can make
+generators like this:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">fib</span><span class="p">():</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">a</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+</div>
+<p>We then commonly use it in a <tt class="docutils literal"><span class="pre">for</span></tt> loop like this:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fib</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is fast and does not put a lot of pressure on memory because it
+<strong>generates</strong> the values on the fly rather then storing them in a list.
+Now if we use <tt class="docutils literal"><span class="pre">yield</span></tt> in the above example more generally we get a
+coroutine. Coroutines consume values which are sent to it. A very basic
+example would be a <tt class="docutils literal"><span class="pre">grep</span></tt> alternative in Python:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">grep</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;Searching for </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">pattern</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="p">(</span><span class="k">yield</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wait! What does <tt class="docutils literal"><span class="pre">yield</span></tt> return? Well we have turned it into a
+coroutine. It does not contain any value innitially instead we supply it
+values externally. We supply values by using the <tt class="docutils literal"><span class="pre">.send()</span></tt> method.
+Here is an example:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">search</span> <span class="o">=</span> <span class="n">grep</span><span class="p">(</span><span class="s">&#39;coroutine&#39;</span><span class="p">)</span>
+<span class="n">search</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<span class="c"># Output: Searching for coroutine</span>
+<span class="n">search</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;I love you&quot;</span><span class="p">)</span>
+<span class="n">search</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;Don&#39;t you love me?&quot;</span><span class="p">)</span>
+<span class="n">search</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;I love coroutines instead!&quot;</span><span class="p">)</span>
+<span class="c"># Output: I love coroutines instead!</span>
+</pre></div>
+</div>
+<p>The sent values are accessed by yield. Why did we run <tt class="docutils literal"><span class="pre">.next()</span></tt>? It is
+done to start the coroutine. Just like <tt class="docutils literal"><span class="pre">generators</span></tt> coroutines do not
+start the function immediately. Instead they run it in response to
+<tt class="docutils literal"><span class="pre">.next()</span></tt> and <tt class="docutils literal"><span class="pre">.send()</span></tt> methods. Therefore you have to run
+<tt class="docutils literal"><span class="pre">.next()</span></tt> so that the execution advances to the <tt class="docutils literal"><span class="pre">yield</span></tt> expression.</p>
+<p>We can close a coroutine by calling the <tt class="docutils literal"><span class="pre">.close()</span></tt> method. Like:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">search</span> <span class="o">=</span> <span class="n">grep</span><span class="p">(</span><span class="s">&#39;coroutine&#39;</span><span class="p">)</span>
+<span class="c"># ...</span>
+<span class="n">search</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>There is a lot more to <tt class="docutils literal"><span class="pre">coroutines</span></tt>. I suggest you check out <a class="reference external" href="http://www.dabeaz.com/coroutines/Coroutines.pdf">this
+awesome
+presentation</a> by
+David Beazley.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="targeting_python_2_3.html" title="previous chapter">Targeting Python 2+3</a></li>
+      <li>Next: <a href="function_caching.html" title="next chapter">Function caching</a></li>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/coroutines.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2015, Muhammad Yasoob Ullah Khalid.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

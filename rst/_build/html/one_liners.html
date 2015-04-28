@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>One Liners &mdash; Python Tips 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Python Tips 0.1 documentation" href="index.html" />
+    <link rel="next" title="For - Else" href="for_-_else.html" />
+    <link rel="prev" title="Lambdas" href="lambdas.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="for_-_else.html" title="For - Else"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lambdas.html" title="Lambdas"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Python Tips 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="one-liners">
+<h1>One Liners<a class="headerlink" href="#one-liners" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter I will show you some one liner Python commands which can
+be really helpful sometimes.</p>
+<p><strong>Simple Webserver</strong></p>
+<p>Ever wanted to quickly share a file over a network? Well you are in
+luck. Python has a similar feature just for you. Go to the directory
+which you want to serve over network and write the following code in
+terminal:</p>
+<div class="code python highlight-python"><pre># Python 2
+python -m SimpleHTTPServer
+
+# Python 3
+python -m http.server</pre>
+</div>
+<p><strong>Pretty printing</strong></p>
+<p>You can print a list and dictionary in a beautiful format in Python
+repl. Here is the relevant code:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="n">my_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;name&#39;</span><span class="p">:</span><span class="s">&#39;Yasoob&#39;</span><span class="p">,</span>
+<span class="s">&#39;age&#39;</span><span class="p">:</span><span class="s">&#39;undefined&#39;</span><span class="p">,</span><span class="s">&#39;personality&#39;</span><span class="p">:</span><span class="s">&#39;awesome&#39;</span><span class="p">}</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">my_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is more effective on dicts. Moreover, if you want to pretty print
+json quickly from a file then you can simply do:</p>
+<div class="code python highlight-python"><pre>cat file.json | python -m json.tools</pre>
+</div>
+<p><strong>Profiling a script</strong></p>
+<p>This can be extremely helpful in pin pointing the bottlenecks in your
+scripts.</p>
+<div class="code python highlight-python"><pre>python -m cProfile my_script.py</pre>
+</div>
+<p>Note: <tt class="docutils literal"><span class="pre">cProfile</span></tt> is a faster implementation of <tt class="docutils literal"><span class="pre">profile</span></tt> as it is
+written in c</p>
+<p><strong>CSV to json</strong></p>
+<p>Run this in the terminal:</p>
+<div class="code python highlight-python"><pre>python -c "import csv,json;print json.dumps(list(csv.reader(open('csv_file.csv'))))"</pre>
+</div>
+<p>Make sure that you replace <tt class="docutils literal"><span class="pre">csv_file.csv</span></tt> to the relevant file name.</p>
+<p><strong>List Flattening</strong></p>
+<p>You can quickly and easily flatten a list using
+<tt class="docutils literal"><span class="pre">itertools.chain.from_iterable</span></tt> from the <tt class="docutils literal"><span class="pre">itertools</span></tt> package. Here
+is a simple example:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">a_list</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">a_list</span><span class="p">)))</span>
+<span class="c"># Output: [1, 2, 3, 4, 5, 6]</span>
+</pre></div>
+</div>
+<p>A couple of more one liners can be found on the <a class="reference external" href="https://wiki.python.org/moin/Powerful%20Python%20One-Liners">Python
+website</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="lambdas.html" title="previous chapter">Lambdas</a></li>
+      <li>Next: <a href="for_-_else.html" title="next chapter">For - Else</a></li>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/one_liners.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2015, Muhammad Yasoob Ullah Khalid.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

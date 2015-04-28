@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0"
+      unique-identifier="unknown">
+  <metadata xmlns:opf="http://www.idpf.org/2007/opf"
+        xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:language>en</dc:language>
+    <dc:title>Python Tips</dc:title>
+    <dc:creator opf:role="aut">Muhammad Yasoob Ullah Khalid</dc:creator>
+    <dc:publisher>Muhammad Yasoob Ullah Khalid</dc:publisher>
+    <dc:rights>2015, Muhammad Yasoob Ullah Khalid</dc:rights>
+    <dc:identifier id="unknown" opf:scheme="unknown">unknown</dc:identifier>
+    <dc:date>2015-04-28</dc:date>
+  </metadata>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+    <item id="index.html"
+          href="index.html"
+          media-type="application/xhtml+xml" />
+    <item id="comprehensions.html"
+          href="comprehensions.html"
+          media-type="application/xhtml+xml" />
+    <item id="ternary_operators.html"
+          href="ternary_operators.html"
+          media-type="application/xhtml+xml" />
+    <item id="for_-_else.html"
+          href="for_-_else.html"
+          media-type="application/xhtml+xml" />
+    <item id="enumerate.html"
+          href="enumerate.html"
+          media-type="application/xhtml+xml" />
+    <item id="genindex.html"
+          href="genindex.html"
+          media-type="application/xhtml+xml" />
+    <item id="one_liners.html"
+          href="one_liners.html"
+          media-type="application/xhtml+xml" />
+    <item id="__slots__magic.html"
+          href="__slots__magic.html"
+          media-type="application/xhtml+xml" />
+    <item id="classes.html"
+          href="classes.html"
+          media-type="application/xhtml+xml" />
+    <item id="set_-_data_structure.html"
+          href="set_-_data_structure.html"
+          media-type="application/xhtml+xml" />
+    <item id="exceptions.html"
+          href="exceptions.html"
+          media-type="application/xhtml+xml" />
+    <item id="global_&amp;_return.html"
+          href="global_&amp;_return.html"
+          media-type="application/xhtml+xml" />
+    <item id="coroutines.html"
+          href="coroutines.html"
+          media-type="application/xhtml+xml" />
+    <item id="decorators.html"
+          href="decorators.html"
+          media-type="application/xhtml+xml" />
+    <item id="debugging.html"
+          href="debugging.html"
+          media-type="application/xhtml+xml" />
+    <item id="python_modules_in_c.html"
+          href="python_modules_in_c.html"
+          media-type="application/xhtml+xml" />
+    <item id="lambdas.html"
+          href="lambdas.html"
+          media-type="application/xhtml+xml" />
+    <item id="mutation.html"
+          href="mutation.html"
+          media-type="application/xhtml+xml" />
+    <item id="collections.html"
+          href="collections.html"
+          media-type="application/xhtml+xml" />
+    <item id="object_introspection.html"
+          href="object_introspection.html"
+          media-type="application/xhtml+xml" />
+    <item id="open_function.html"
+          href="open_function.html"
+          media-type="application/xhtml+xml" />
+    <item id="SUMMARY.html"
+          href="SUMMARY.html"
+          media-type="application/xhtml+xml" />
+    <item id="function_caching.html"
+          href="function_caching.html"
+          media-type="application/xhtml+xml" />
+    <item id="map_&amp;_filter.html"
+          href="map_&amp;_filter.html"
+          media-type="application/xhtml+xml" />
+    <item id="virtual_environment.html"
+          href="virtual_environment.html"
+          media-type="application/xhtml+xml" />
+    <item id="targeting_python_2_3.html"
+          href="targeting_python_2_3.html"
+          media-type="application/xhtml+xml" />
+    <item id="generators.html"
+          href="generators.html"
+          media-type="application/xhtml+xml" />
+    <item id="search.html"
+          href="search.html"
+          media-type="application/xhtml+xml" />
+    <item id="README.html"
+          href="README.html"
+          media-type="application/xhtml+xml" />
+    <item id="args_and_kwargs.html"
+          href="args_and_kwargs.html"
+          media-type="application/xhtml+xml" />
+    <item id="_static_basic.css"
+          href="_static/basic.css"
+          media-type="text/css" />
+    <item id="_static_comment.png"
+          href="_static/comment.png"
+          media-type="image/png" />
+    <item id="_static_down-pressed.png"
+          href="_static/down-pressed.png"
+          media-type="image/png" />
+    <item id="_static_comment-close.png"
+          href="_static/comment-close.png"
+          media-type="image/png" />
+    <item id="_static_minus.png"
+          href="_static/minus.png"
+          media-type="image/png" />
+    <item id="_static_ajax-loader.gif"
+          href="_static/ajax-loader.gif"
+          media-type="image/gif" />
+    <item id="_static_pygments.css"
+          href="_static/pygments.css"
+          media-type="text/css" />
+    <item id="_static_comment-bright.png"
+          href="_static/comment-bright.png"
+          media-type="image/png" />
+    <item id="_static_logo-full.png"
+          href="_static/logo-full.png"
+          media-type="image/png" />
+    <item id="_static_epub.css"
+          href="_static/epub.css"
+          media-type="text/css" />
+    <item id="_static_down.png"
+          href="_static/down.png"
+          media-type="image/png" />
+    <item id="_static_file.png"
+          href="_static/file.png"
+          media-type="image/png" />
+    <item id="_static_up-pressed.png"
+          href="_static/up-pressed.png"
+          media-type="image/png" />
+    <item id="_static_up.png"
+          href="_static/up.png"
+          media-type="image/png" />
+    <item id="_static_plus.png"
+          href="_static/plus.png"
+          media-type="image/png" />
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="index.html" />
+    <itemref idref="args_and_kwargs.html" />
+    <itemref idref="debugging.html" />
+    <itemref idref="generators.html" />
+    <itemref idref="map_&amp;amp;_filter.html" />
+    <itemref idref="set_-_data_structure.html" />
+    <itemref idref="ternary_operators.html" />
+    <itemref idref="decorators.html" />
+    <itemref idref="global_&amp;amp;_return.html" />
+    <itemref idref="mutation.html" />
+    <itemref idref="__slots__magic.html" />
+    <itemref idref="virtual_environment.html" />
+    <itemref idref="collections.html" />
+    <itemref idref="enumerate.html" />
+    <itemref idref="object_introspection.html" />
+    <itemref idref="comprehensions.html" />
+    <itemref idref="exceptions.html" />
+    <itemref idref="lambdas.html" />
+    <itemref idref="one_liners.html" />
+    <itemref idref="for_-_else.html" />
+    <itemref idref="open_function.html" />
+    <itemref idref="targeting_python_2_3.html" />
+    <itemref idref="coroutines.html" />
+    <itemref idref="function_caching.html" />
+    <itemref idref="genindex.html" />
+  </spine>
+  <guide>
+    <reference type="toc" title="Table of Contents" href="index.html" />
+  </guide>
+</package>

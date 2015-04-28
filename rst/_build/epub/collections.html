@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Collections</title>
+    
+    <link rel="stylesheet" href="_static/epub.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head>
+  <body>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="enumerate.html" title="Enumerate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="virtual_environment.html" title="Virtual Environment"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Python Tips 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="collections">
+<h1>Collections</h1>
+<p>Python ships with a module that contains a number of container data
+types called Collections. We will talk about a few of them and discuss
+their usefullness.</p>
+<p>The ones which we will talk about are:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">defaultdict</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">counter</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">deque</span></tt></li>
+</ul>
+<div class="section" id="defaultdict">
+<h2>1.<tt class="docutils literal"><span class="pre">defaultdict</span></tt></h2>
+<p>I personally use defaultdict quite a bit. Unlike <tt class="docutils literal"><span class="pre">dict</span></tt>, with
+<tt class="docutils literal"><span class="pre">defaultdict</span></tt> you do not need to check whether a key is present or
+not. So we can do:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="n">colours</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s">&#39;Yasoob&#39;</span><span class="p">,</span> <span class="s">&#39;Yellow&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Ali&#39;</span><span class="p">,</span> <span class="s">&#39;Blue&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Arham&#39;</span><span class="p">,</span> <span class="s">&#39;Green&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Ali&#39;</span><span class="p">,</span> <span class="s">&#39;Black&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Yasoob&#39;</span><span class="p">,</span> <span class="s">&#39;Red&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Ahmed&#39;</span><span class="p">,</span> <span class="s">&#39;Silver&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">favourite_colours</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">colour</span> <span class="ow">in</span> <span class="n">order</span><span class="p">:</span>
+    <span class="n">favourite_colours</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">colour</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">favourite_colours</span><span class="p">)</span>
+
+<span class="c"># output</span>
+<span class="c"># defaultdict(&lt;type &#39;list&#39;&gt;,</span>
+<span class="c">#    {&#39;Arham&#39;: [&#39;Green&#39;],</span>
+<span class="c">#     &#39;Yasoob&#39;: [&#39;Yellow&#39;, &#39;Red&#39;],</span>
+<span class="c">#     &#39;Ahmed&#39;: [&#39;Silver&#39;],</span>
+<span class="c">#     &#39;Ali&#39;: [&#39;Blue&#39;, &#39;Black&#39;]</span>
+<span class="c"># })</span>
+</pre></div>
+</div>
+<p>One another very important use case is when you are appending to nested
+ists inside a dictionary. If a <tt class="docutils literal"><span class="pre">key</span></tt> is not already present in the
+dictionary then you are greeted with a <tt class="docutils literal"><span class="pre">KeyError</span></tt>. <tt class="docutils literal"><span class="pre">defaultdict</span></tt>
+allows us to circumvent this issue in a clever way. First let me share
+an example using <tt class="docutils literal"><span class="pre">dict</span></tt> which raises <tt class="docutils literal"><span class="pre">KeyError</span></tt> and then I will
+share a solution using <tt class="docutils literal"><span class="pre">defaultdict</span></tt>.</p>
+<p><strong>Problem:</strong></p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">some_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">some_dict</span><span class="p">[</span><span class="s">&#39;colours&#39;</span><span class="p">][</span><span class="s">&#39;favourite&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;yellow&quot;</span>
+<span class="c"># Raises KeyError: &#39;colours&#39;</span>
+</pre></div>
+</div>
+<p><strong>Solution:</strong></p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">collections</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="n">some_dict</span> <span class="o">=</span> <span class="n">tree</span><span class="p">()</span>
+<span class="n">some_dict</span><span class="p">[</span><span class="s">&#39;colours&#39;</span><span class="p">][</span><span class="s">&#39;favourite&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;yellow&quot;</span>
+<span class="c"># Works fine</span>
+</pre></div>
+</div>
+<p>You can print the <tt class="docutils literal"><span class="pre">some_dict</span></tt> using <tt class="docutils literal"><span class="pre">json.dumps</span></tt>. Here is some
+sample code:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">json</span>
+<span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">some_dict</span><span class="p">))</span>
+<span class="c"># Output: {&quot;colours&quot;: {&quot;favourite&quot;: &quot;yellow&quot;}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="counter">
+<h2>2.<tt class="docutils literal"><span class="pre">counter</span></tt></h2>
+<p>Counter allows us to count the occurances of a particular item. For
+instance it can be used to count the number of individual favourite
+colours:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">colours</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="s">&#39;Yasoob&#39;</span><span class="p">,</span> <span class="s">&#39;Yellow&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Ali&#39;</span><span class="p">,</span> <span class="s">&#39;Blue&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Arham&#39;</span><span class="p">,</span> <span class="s">&#39;Green&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Ali&#39;</span><span class="p">,</span> <span class="s">&#39;Black&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Yasoob&#39;</span><span class="p">,</span> <span class="s">&#39;Red&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s">&#39;Ahmed&#39;</span><span class="p">,</span> <span class="s">&#39;Silver&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">favs</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">colour</span> <span class="ow">in</span> <span class="n">colours</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">favs</span><span class="p">)</span>
+<span class="c"># Output: Counter({</span>
+<span class="c">#    &#39;Yasoob&#39;: 2,</span>
+<span class="c">#    &#39;Ali&#39;: 2,</span>
+<span class="c">#    &#39;Arham&#39;: 1,</span>
+<span class="c">#    &#39;Ahmed&#39;: 1</span>
+<span class="c"># })</span>
+</pre></div>
+</div>
+<p>We can also count the most common lines in a file using it. For example:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;filename&#39;</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">line_count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line_count</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deque">
+<h2>3.<tt class="docutils literal"><span class="pre">deque</span></tt></h2>
+<p><tt class="docutils literal"><span class="pre">deque</span></tt> provides you with a double ended queue which means that you
+can append and delete elements from either side of the queue. First of
+all you have to import the deque module from the collections library:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+</pre></div>
+</div>
+<p>Now we can instantiate a deque object.</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It works like python lists and provides you with somewhat similar
+methods as well. For example you can do:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+<span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;1&#39;</span><span class="p">)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;2&#39;</span><span class="p">)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;3&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+<span class="c"># Output: 3</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="c"># Output: &#39;1&#39;</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="c"># Output: &#39;3&#39;</span>
+</pre></div>
+</div>
+<p>You can pop values from both sides of the deque:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+<span class="c"># Output: 5</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="c"># Output: 0</span>
+
+<span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="c"># Output: 4</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="c"># Output: deque([1, 2, 3])</span>
+</pre></div>
+</div>
+<p>We can also limit the amount of items a deque can hold. By doing this
+when we achieve the maximum limit of out deque it will simply pop out
+the items from the opposite end. It is better to explain it using an
+example so here you go:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now whenever you insert values after 30, the leftmost value will be
+popped from the list. You can also expand the list in any direction with
+new values:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">d</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">d</span><span class="o">.</span><span class="n">extendleft</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">d</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="c"># Output: deque([0, 1, 2, 3, 4, 5, 6, 7, 8])</span>
+</pre></div>
+</div>
+<p>This was just a quick drive through the <tt class="docutils literal"><span class="pre">collections</span></tt> module. Make
+sure you read the official documentation after reading this.</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Muhammad Yasoob Ullah Khalid.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>

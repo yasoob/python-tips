@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Comprehensions &mdash; Python Tips 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Python Tips 0.1 documentation" href="index.html" />
+    <link rel="next" title="Exceptions" href="exceptions.html" />
+    <link rel="prev" title="Object introspection" href="object_introspection.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="exceptions.html" title="Exceptions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="object_introspection.html" title="Object introspection"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Python Tips 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="comprehensions">
+<h1>Comprehensions<a class="headerlink" href="#comprehensions" title="Permalink to this headline">¶</a></h1>
+<p>Comprehensions are a feature of Python which I would really miss if I
+ever have to leave it. Comprehensions are constructs that allow
+sequences to be built from other sequences. There are three type of
+comprehensions in Python:</p>
+<ul class="simple">
+<li>list comprehensions</li>
+<li>dictionary comprehensions</li>
+<li>set comprehensions</li>
+</ul>
+<p><tt class="docutils literal"><span class="pre">list</span></tt> comprehensions were introduced in Python 2. <tt class="docutils literal"><span class="pre">set</span></tt> and
+<tt class="docutils literal"><span class="pre">dictionary</span></tt> comprehensions became a part of Python in version 3.0.</p>
+<p>We will discuss them one by one. Once you get the hang of using <tt class="docutils literal"><span class="pre">list</span></tt>
+comprehensions then you can use anyone of them easily.</p>
+<div class="section" id="list-comprehensions">
+<h2><tt class="docutils literal"><span class="pre">list</span></tt> comprehensions<a class="headerlink" href="#list-comprehensions" title="Permalink to this headline">¶</a></h2>
+<p>List comprehensions provide a short and concise way to create lists. It
+consists of square brackets containing an expression followed by a
+<tt class="docutils literal"><span class="pre">for</span></tt> clause, then zero or more <tt class="docutils literal"><span class="pre">for</span></tt> or <tt class="docutils literal"><span class="pre">if</span></tt> clauses. The
+expressions can be anything, meaning you can put in all kinds of objects
+in lists. The result would be a new list made after the evaluation of
+the expression in context of the <tt class="docutils literal"><span class="pre">if</span></tt> and <tt class="docutils literal"><span class="pre">for</span></tt> clauses.</p>
+<p><strong>Blueprint</strong></p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">variable</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_exp</span> <span class="k">for</span> <span class="n">out_exp</span> <span class="ow">in</span> <span class="n">input_list</span> <span class="k">if</span> <span class="n">out_exp</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here is a short example:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">multiples</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="ow">is</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">multiples</span><span class="p">)</span>
+<span class="c"># Output: [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]</span>
+</pre></div>
+</div>
+<p>This can be really useful to make lists quickly. It is even preferred by
+some instead of <tt class="docutils literal"><span class="pre">filter</span></tt> function. <tt class="docutils literal"><span class="pre">list</span></tt> comprehensions really
+shine when you want to supply a list to a method or function to make a
+new list by appending to it in each iteration of the <tt class="docutils literal"><span class="pre">for</span></tt> loop. For
+instance you would usually do something like this:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">squared</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">squared</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can simplify it using <tt class="docutils literal"><span class="pre">list</span></tt> comprehensions. For example:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">squared</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dict-comprehensions">
+<h2><tt class="docutils literal"><span class="pre">dict</span></tt> comprehensions<a class="headerlink" href="#dict-comprehensions" title="Permalink to this headline">¶</a></h2>
+<p>They are used in a similar way. Here is an example which I found
+recently:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">mcase</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span> <span class="mi">34</span><span class="p">,</span> <span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&#39;Z&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+
+<span class="n">mcase_frequency</span> <span class="o">=</span> <span class="p">{</span> <span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="p">:</span> <span class="n">mcase</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> \
+<span class="n">mcase</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">mcase</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">}</span>
+
+<span class="c"># mcase_frequency == {&#39;a&#39;: 17, &#39;z&#39;: 3, &#39;b&#39;: 34}</span>
+</pre></div>
+</div>
+<p>In the above example we are combining the values of keys which are same
+but in different typecase. I personally do not use <tt class="docutils literal"><span class="pre">dict</span></tt>
+comprehensions a lot. You can also quickly reverse a dictionary:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">some_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-comprehensions">
+<h2><tt class="docutils literal"><span class="pre">set</span></tt> comprehensions<a class="headerlink" href="#set-comprehensions" title="Permalink to this headline">¶</a></h2>
+<p>They are also similar to list comprehensions. The only difference is
+that they use round brackets <tt class="docutils literal"><span class="pre">()</span></tt> and return a generator. Here is an
+example:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span class="n">squared</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">squared</span><span class="p">)</span>
+<span class="c"># Output: &lt;generator object &lt;genexpr&gt; at 0x00000000029931B0&gt;</span>
+<span class="n">squared</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<span class="c"># Output: 0</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Comprehensions</a><ul>
+<li><a class="reference internal" href="#list-comprehensions"><tt class="docutils literal"><span class="pre">list</span></tt> comprehensions</a></li>
+<li><a class="reference internal" href="#dict-comprehensions"><tt class="docutils literal"><span class="pre">dict</span></tt> comprehensions</a></li>
+<li><a class="reference internal" href="#set-comprehensions"><tt class="docutils literal"><span class="pre">set</span></tt> comprehensions</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="object_introspection.html" title="previous chapter">Object introspection</a></li>
+      <li>Next: <a href="exceptions.html" title="next chapter">Exceptions</a></li>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/comprehensions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2015, Muhammad Yasoob Ullah Khalid.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

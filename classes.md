@@ -107,6 +107,55 @@ __Note:__ Python 3 only has new-style classes. It does not matter whether you su
 
 Python's classes are famous for their magic methods, commonly called __dunder__ methods. I am going to discuss a few of them.
 
+- `__init__`
+
+It is a class innitializer. Whenever an instance of a class is created it's `__init__` method. For instance:
+
+```python
+class GetTest(object):
+    def __init__(self):
+        print('Greetings!!')
+    def another_method(self):
+        print('I am another method which is not automatically called')
+
+a = GetTest()
+# Output: Greetings!!
+
+a.another_method()
+# Output: I am another method which is not automatically 
+# called
+```
+
 - `__getitem__` 
 
-Implementing __getitem__ in a class allows its instances to use the [] (indexer) operator. 
+Implementing __getitem__ in a class allows its instances to use the [] (indexer) operator. Here is an example:
+
+```python
+class GetTest(object):
+    def __init__(self):
+        self.info = {
+            'name':'Yasoob',
+            'country':'Pakistan',
+            'number':12345812
+        }
+        
+    def __getitem__(self,i):
+        return self.info[i]
+
+foo = OldClass()
+foo['title']
+# Output: 'Yasoob'
+
+foo['number']
+# Output: 36845124
+```
+
+Without the `__getitem__` method we would have got this error:
+
+```python
+>>> foo['title']
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'GetTest' object has no attribute '__getitem__'
+```

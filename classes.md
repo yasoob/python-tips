@@ -127,6 +127,28 @@ a.another_method()
 # called
 ```
 
+You can see that `__init__` is called immediately after an instance is created. You can also pass arguments to the class during it's innitialization. Like this:
+
+```python
+class GetTest(object):
+    def __init__(self, name):
+        print('Greetings!! {0}'.format(name))
+    def another_method(self):
+        print('I am another method which is not'
+              ' automatically called')
+
+a = GetTest('yasoob')
+# Output: Greetings!! yasoob
+
+# Try creating an instance without the name arguments
+b = GetTest()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: __init__() takes exactly 2 arguments (1 given)
+```
+
+I am sure that now you understand the `__init__` method.
+
 - `__getitem__` 
 
 Implementing __getitem__ in a class allows its instances to use the [] (indexer) operator. Here is an example:

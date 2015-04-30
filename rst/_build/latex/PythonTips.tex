@@ -147,8 +147,9 @@ or **kwargs. Only the \code{*} (aesteric) is necessary. You could have
 also written *var and **vars. Writing *args and **kwargs is just a
 convention. So now lets take a look at *args first.
 
-\textbf{Usage of *args}
 
+\section{Usage of *args}
+\label{args_and_kwargs:usage-of-args}
 *args and **kwargs are mostly used in function definitions. *args
 and **kwargs allow you to pass a variable number of arguments to a
 function. What does variable mean here is that you do not know before
@@ -178,8 +179,9 @@ another arg through *argv : test
 I hope this cleared away any confusion that you had. So now lets talk
 about **kwargs
 
-\textbf{Usage of **kwargs}
 
+\section{Usage of **kwargs}
+\label{args_and_kwargs:usage-of-kwargs}
 **kwargs allows you to pass \textbf{keyworded} variable length of arguments
 to a function. You should use **kwargs if you want to handle \textbf{named
 arguments} in a function. Here is an example to get you going with it:
@@ -199,8 +201,9 @@ This is just the basics of **kwargs and you can see how useful it is.
 Now lets talk about how you can use *args and **kwargs to call a
 function with a list or dictionary of arguments.
 
-\textbf{Using *args and **kwargs to call a function}
 
+\section{Using *args and **kwargs to call a function}
+\label{args_and_kwargs:using-args-and-kwargs-to-call-a-function}
 So here we will see how to call a function using *args and **kwargs.
 Just consider that you have this little function:
 \DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{literal,string}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{keyword}{}\DUspan{literal,string}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{keyword}{}\DUspan{literal,string}{}\DUspan{punctuation}{}\DUspan{name}{}
@@ -237,6 +240,28 @@ So if you want to use all three of these in functions then the order is
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{n}{some\PYGZus{}func}\PYG{p}{(}\PYG{n}{fargs}\PYG{p}{,}\PYG{o}{*}\PYG{n}{args}\PYG{p}{,}\PYG{o}{*}\PYG{o}{*}\PYG{n}{kwargs}\PYG{p}{)}
 \end{Verbatim}
+
+
+\section{When to use them?}
+\label{args_and_kwargs:when-to-use-them}
+It really depends on what are your requirements. The most common use
+case is when making function decorators (discussed in another chapter).
+More over it can be used in monkey patching as well. Monkey patching
+means modifying some code at runtime. Consider that you have a class
+with a function called \code{get\_info} which calls an API and returns the
+response data. If we want to test it we can replace the API call with
+some test data. For instance:
+\DUspan{keyword,namespace}{}\DUspan{name,namespace}{}\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{name,builtin,pseudo}{}\DUspan{punctuation}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{literal,string}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{name}{}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{someclass}
+
+\PYG{k}{def} \PYG{n+nf}{get\PYGZus{}info}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{o}{*}\PYG{n}{args}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{return} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Test data}\PYG{l+s}{\PYGZdq{}}
+
+\PYG{n}{someclass}\PYG{o}{.}\PYG{n}{get\PYGZus{}info} \PYG{o}{=} \PYG{n}{get\PYGZus{}info}
+\end{Verbatim}
+
+I am sure that you can think of some other use cases as well.
 
 
 \chapter{Debugging}

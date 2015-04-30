@@ -8,7 +8,8 @@ or \*\*kwargs. Only the ``*`` (aesteric) is necessary. You could have
 also written \*var and \*\*vars. Writing \*args and \*\*kwargs is just a
 convention. So now lets take a look at \*args first.
 
-**Usage of \*args**
+Usage of \*args
+^^^^^^^^^^^^^^^
 
 \*args and \*\*kwargs are mostly used in function definitions. \*args
 and \*\*kwargs allow you to pass a variable number of arguments to a
@@ -39,7 +40,8 @@ This produces the following result:
 I hope this cleared away any confusion that you had. So now lets talk
 about \*\*kwargs
 
-**Usage of \*\*kwargs**
+Usage of \*\*kwargs
+^^^^^^^^^^^^^^^^^^^
 
 \*\*kwargs allows you to pass **keyworded** variable length of arguments
 to a function. You should use \*\*kwargs if you want to handle **named
@@ -60,7 +62,8 @@ This is just the basics of \*\*kwargs and you can see how useful it is.
 Now lets talk about how you can use \*args and \*\*kwargs to call a
 function with a list or dictionary of arguments.
 
-**Using \*args and \*\*kwargs to call a function**
+Using \*args and \*\*kwargs to call a function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 So here we will see how to call a function using \*args and \*\*kwargs.
 Just consider that you have this little function:
@@ -99,3 +102,24 @@ So if you want to use all three of these in functions then the order is
 
     some_func(fargs,*args,**kwargs)
 
+When to use them?
+^^^^^^^^^^^^^^^^^
+
+It really depends on what are your requirements. The most common use
+case is when making function decorators (discussed in another chapter).
+More over it can be used in monkey patching as well. Monkey patching
+means modifying some code at runtime. Consider that you have a class
+with a function called ``get_info`` which calls an API and returns the
+response data. If we want to test it we can replace the API call with
+some test data. For instance:
+
+.. code:: python
+
+    import someclass
+
+    def get_info(self, *args):
+        return "Test data"
+
+    someclass.get_info = get_info
+
+I am sure that you can think of some other use cases as well.

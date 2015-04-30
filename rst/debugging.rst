@@ -7,9 +7,6 @@ Python debugger (``pdb``). In this section I am going to tell you only a
 few important commands. You can learn more about it from the official
 documentation.
 
-Using ``pdb``
-^^^^^^
-
 **Running from commandline**
 
 You can run a script from the commandline using the Python debugger.
@@ -43,8 +40,7 @@ Try running the above script after saving it. You would enter the
 debugger as soon as you run it. Now it's time to learn some of the
 commands of the debugger.
 
-Commands:
-^^^^^^
+**Commands:**
 
 -  ``c``: continue execution
 -  ``w``: shows the context of the current line it is executing.

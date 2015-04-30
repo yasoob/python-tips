@@ -1,5 +1,5 @@
 \_\_slots\_\_ Magic
-===================
+-------------------
 
 In Python every class can have instance attributes. By default Python
 uses a dict to store an object’s instance attributes. This is really

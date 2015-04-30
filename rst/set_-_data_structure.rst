@@ -1,9 +1,6 @@
 ``set`` Data Structure
 ----------------------
 
-Intro to ``set``
-^^^^^^^^^^^
-
 ``set`` is a really useful data structure. ``sets`` behave mostly like
 lists with the distinction that they can not contain duplicate values.
 It is really useful in a lot of cases. For instance you might want to
@@ -35,9 +32,6 @@ can simply do something like this:
     # Output: set(['b', 'n'])
 
 Sets also have a few other methods. Below are some of them.
-
-``set`` Methods
-^^^^^^^^^^^^^
 
 **Intersection**
 

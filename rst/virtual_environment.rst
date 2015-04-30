@@ -1,9 +1,6 @@
 Virtual Environment
 -------------------
 
-Introducing ``virtualenv``
-^^^^^^^^^^^^^^^^^^^^^^
-
 Have you ever heard of ``virtualenv``? The chances are that if you are a
 beginner then you might not have heard about it but if you are a
 seasoned programmer than it's a vital part of your toolset. So what
@@ -61,8 +58,7 @@ by typing:
 
     $ deactivate
 
-Bonus
-^^^^^^
+**Bonus**
 
 You can use ``smartcd`` which is a library for bash and zsh and allows
 you to alter your bash (or zsh) environment as you cd. It can be really

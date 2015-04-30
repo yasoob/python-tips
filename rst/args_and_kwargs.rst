@@ -8,8 +8,7 @@ or \*\*kwargs. Only the ``*`` (aesteric) is necessary. You could have
 also written \*var and \*\*vars. Writing \*args and \*\*kwargs is just a
 convention. So now lets take a look at \*args first.
 
-Usage of \*args
-^^^^^^
+**Usage of \*args**
 
 \*args and \*\*kwargs are mostly used in function definitions. \*args
 and \*\*kwargs allow you to pass a variable number of arguments to a
@@ -40,8 +39,7 @@ This produces the following result:
 I hope this cleared away any confusion that you had. So now lets talk
 about \*\*kwargs
 
-Usage of \*\*kwargs
-^^^^^^
+**Usage of \*\*kwargs**
 
 \*\*kwargs allows you to pass **keyworded** variable length of arguments
 to a function. You should use \*\*kwargs if you want to handle **named

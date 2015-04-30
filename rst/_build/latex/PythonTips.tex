@@ -14,7 +14,7 @@
 \usepackage{flaskstyle}
 
 \title{Python Tips}
-\date{April 28, 2015}
+\date{April 30, 2015}
 \release{0.1}
 \author{Muhammad Yasoob Ullah Khalid}
 \newcommand{\sphinxlogo}{\includegraphics{logo-full.png}\par}
@@ -147,9 +147,8 @@ or **kwargs. Only the \code{*} (aesteric) is necessary. You could have
 also written *var and **vars. Writing *args and **kwargs is just a
 convention. So now lets take a look at *args first.
 
+\textbf{Usage of *args}
 
-\section{Usage of *args}
-\label{args_and_kwargs:usage-of-args}
 *args and **kwargs are mostly used in function definitions. *args
 and **kwargs allow you to pass a variable number of arguments to a
 function. What does variable mean here is that you do not know before
@@ -179,9 +178,8 @@ another arg through *argv : test
 I hope this cleared away any confusion that you had. So now lets talk
 about **kwargs
 
+\textbf{Usage of **kwargs}
 
-\section{Usage of **kwargs}
-\label{args_and_kwargs:usage-of-kwargs}
 **kwargs allows you to pass \textbf{keyworded} variable length of arguments
 to a function. You should use **kwargs if you want to handle \textbf{named
 arguments} in a function. Here is an example to get you going with it:
@@ -249,9 +247,6 @@ Python debugger (\code{pdb}). In this section I am going to tell you only a
 few important commands. You can learn more about it from the official
 documentation.
 
-
-\section{Using \texttt{pdb}}
-\label{debugging:using-pdb}
 \textbf{Running from commandline}
 
 You can run a script from the commandline using the Python debugger.
@@ -285,9 +280,8 @@ Try running the above script after saving it. You would enter the
 debugger as soon as you run it. Now it's time to learn some of the
 commands of the debugger.
 
-
-\section{Commands:}
-\label{debugging:commands}\begin{itemize}
+\textbf{Commands:}
+\begin{itemize}
 \item {} 
 \code{c}: continue execution
 
@@ -319,26 +313,80 @@ official documentation and learn more about it.
 
 \chapter{Generators}
 \label{generators:generators}\label{generators::doc}
+First lets understand iterators. According to Wikipedia, an iterator is
+an object that enables a programmer to traverse a container,
+particularly lists. However, an iterator performs traversal and gives
+access to data elements in a container, but does not perform iteration.
+You might be confused so lets take it a bit slow. There are three parts
+namely:
+\begin{itemize}
+\item {} 
+Iterable
+
+\item {} 
+Iterator
+
+\item {} 
+Iteration
+
+\end{itemize}
+
+All of these parts are linked to each other. We will discuss them one by
+one and later talk about generators.
+
+
+\section{Iterable}
+\label{generators:iterable}
+An \code{iterable} is any object in Python which has an \code{\_\_iter\_\_} or a
+\code{\_\_getitem\_\_} method defined which returns an \textbf{iterator} or can take
+indexes (Both of these dunder methods are fully explained in a previous
+chapter). In short an \code{iterable} is any object which can provide us
+with an \textbf{iterator}. So what is an \textbf{iterator}?
+
+
+\section{Iterator}
+\label{generators:iterator}
+An iterator is any object in Python which has a \code{next} (Python2) or
+\code{\_\_next\_\_} method defined. That's it. That's an iterator. Now let's
+understand \textbf{iteration}.
+
+
+\section{Iteration}
+\label{generators:iteration}
+In simple words it is the process of taking an item from something e.g a
+list. When we use a loop to loop over something it is called iteration.
+It is the name given to the process itself. Now as we have a basic
+understanding of these terms let's understand \textbf{generators}.
+
+
+\section{Generators}
+\label{generators:id1}
 Generators are iterators, but you can only iterate over them once. It’s
 because they do not store all the values in memory, they generate the
-values on the fly. You use them by iterating over them, either
-explicitly with `for' or implicitly by passing it to any function or
-construct that iterates. Most of the time \code{generators} are implemented
-as functions. However, they do not \code{return} a value, they \code{yield}
-it. Here is a simple example of a \code{generator} function:
-\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{literal,number,integer}{}\DUspan{keyword}{}\DUspan{literal,number,integer}{}\DUspan{keyword}{}\DUspan{literal,number,integer}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{operator,word}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}
+values on the fly. You use them by iterating over them, either with a
+`for' loop or by passing them to any function or construct that
+iterates. Most of the time \code{generators} are implemented as functions.
+However, they do not \code{return} a value, they \code{yield} it. Here is a
+simple example of a \code{generator} function:
+\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{operator,word}{}\DUspan{name,builtin}{}\DUspan{punctuation}{}\DUspan{literal,number,integer}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{operator,word}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{k}{def} \PYG{n+nf}{generator\PYGZus{}function}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-    \PYG{k}{yield} \PYG{l+m+mi}{1}
-    \PYG{k}{yield} \PYG{l+m+mi}{2}
-    \PYG{k}{yield} \PYG{l+m+mi}{3}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{yield} \PYG{n}{i}
 
 \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{generator\PYGZus{}function}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
     \PYG{k}{print}\PYG{p}{(}\PYG{n}{item}\PYG{p}{)}
 
-\PYG{c}{\PYGZsh{} Output: 1}
+\PYG{c}{\PYGZsh{} Output: 0}
+\PYG{c}{\PYGZsh{} 1}
 \PYG{c}{\PYGZsh{} 2}
 \PYG{c}{\PYGZsh{} 3}
+\PYG{c}{\PYGZsh{} 4}
+\PYG{c}{\PYGZsh{} 5}
+\PYG{c}{\PYGZsh{} 6}
+\PYG{c}{\PYGZsh{} 7}
+\PYG{c}{\PYGZsh{} 8}
+\PYG{c}{\PYGZsh{} 9}
 \end{Verbatim}
 
 It is not really useful in this case. Generators are best for
@@ -379,8 +427,64 @@ However, if we would have implemented it like this:
 \end{Verbatim}
 
 It would have used up all our resources while calculating a large input.
-Make sure that you follow this pattern and use \code{generators} whenever
-they make sense. You wont be disappointed!
+We have discussed that we can iterate over \code{generators} only once but
+we haven't tested it. Before testing it you need to know about one more
+built-in function of Python, \code{next()}. It allows us to access the next
+element of a sequence. So let's test out our understanding:
+\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{operator,word}{}\DUspan{name,builtin}{}\DUspan{punctuation}{}\DUspan{literal,number,integer}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{punctuation}{}\DUspan{name,builtin}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{keyword}{}\DUspan{punctuation}{}\DUspan{name,builtin}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{keyword}{}\DUspan{punctuation}{}\DUspan{name,builtin}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{keyword}{}\DUspan{punctuation}{}\DUspan{name,builtin}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{generator\PYGZus{}function}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{yield} \PYG{n}{i}
+
+\PYG{n}{gen} \PYG{o}{=} \PYG{n}{generator\PYGZus{}function}\PYG{p}{(}\PYG{p}{)}
+\PYG{k}{print}\PYG{p}{(}\PYG{n+nb}{next}\PYG{p}{(}\PYG{n}{gen}\PYG{p}{)}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: 0}
+\PYG{k}{print}\PYG{p}{(}\PYG{n+nb}{next}\PYG{p}{(}\PYG{n}{gen}\PYG{p}{)}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: 1}
+\PYG{k}{print}\PYG{p}{(}\PYG{n+nb}{next}\PYG{p}{(}\PYG{n}{gen}\PYG{p}{)}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: 2}
+\PYG{k}{print}\PYG{p}{(}\PYG{n+nb}{next}\PYG{p}{(}\PYG{n}{gen}\PYG{p}{)}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: Traceback (most recent call last):}
+\PYG{c}{\PYGZsh{}            File \PYGZdq{}\PYGZlt{}stdin\PYGZgt{}\PYGZdq{}, line 1, in \PYGZlt{}module\PYGZgt{}}
+\PYG{c}{\PYGZsh{}         StopIteration}
+\end{Verbatim}
+
+As we can see that after yielding all the values \code{next()} caused a
+\code{StopIteration} error. Basically this error informs us that all the
+values have been yielded. You might be wondering that why don't we get
+this error while using a \code{for} loop? Well the answer is simple. The
+\code{for} loop automatically catches this error and stops calling
+\code{next}. Do you know that a few built-in data types in Python also
+support iteration? Let's check it out:
+\DUspan{name}{}\DUspan{operator}{}\DUspan{literal,string}{}\DUspan{name,builtin}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{comment}{}\DUspan{comment}{}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{my\PYGZus{}string} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Yasoob}\PYG{l+s}{\PYGZdq{}}
+\PYG{n+nb}{next}\PYG{p}{(}\PYG{n}{my\PYGZus{}string}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: Traceback (most recent call last):}
+\PYG{c}{\PYGZsh{}      File \PYGZdq{}\PYGZlt{}stdin\PYGZgt{}\PYGZdq{}, line 1, in \PYGZlt{}module\PYGZgt{}}
+\PYG{c}{\PYGZsh{}    TypeError: str object is not an iterator}
+\end{Verbatim}
+
+Well that's not what we expected. The error says that \code{str} is not an
+iterator. Well it is right! It is an iterable but not an iterator. This
+means that it supports iteration but we can not directly iterate over
+it. How can we then iterate over it? It's time to learn about one more
+built-in function, \code{iter}. It returns an \code{iterator} object from an
+iterable. Here is how we can use it:
+\DUspan{name}{}\DUspan{operator}{}\DUspan{literal,string}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{name,builtin}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{name,builtin}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{my\PYGZus{}string} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Yasoob}\PYG{l+s}{\PYGZdq{}}
+\PYG{n}{my\PYGZus{}iter} \PYG{o}{=} \PYG{n+nb}{iter}\PYG{p}{(}\PYG{n}{my\PYGZus{}string}\PYG{p}{)}
+\PYG{n+nb}{next}\PYG{p}{(}\PYG{n}{my\PYGZus{}iter}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: \PYGZsq{}Y\PYGZsq{}}
+\end{Verbatim}
+
+Now that is much better. I am sure that you loved learning about
+generators. Do bear it in mind that you can fully grasp this concept
+only when you use it. Make sure that you follow this pattern and use
+\code{generators} whenever they make sense to you. You wont be
+disappointed!
 
 
 \chapter{Map \& Filter}
@@ -463,9 +567,6 @@ read about \code{list/dict/tuple} comprehensions.
 
 \chapter{\texttt{set} Data Structure}
 \label{set_-_data_structure::doc}\label{set_-_data_structure:set-data-structure}
-
-\section{Intro to \texttt{set}}
-\label{set_-_data_structure:intro-to-set}
 \code{set} is a really useful data structure. \code{sets} behave mostly like
 lists with the distinction that they can not contain duplicate values.
 It is really useful in a lot of cases. For instance you might want to
@@ -498,9 +599,6 @@ can simply do something like this:
 
 Sets also have a few other methods. Below are some of them.
 
-
-\section{\texttt{set} Methods}
-\label{set_-_data_structure:set-methods}
 \textbf{Intersection}
 
 You can intersect two sets. For instance:
@@ -900,9 +998,6 @@ optimizations by default.
 
 \chapter{Virtual Environment}
 \label{virtual_environment::doc}\label{virtual_environment:virtual-environment}
-
-\section{Introducing \texttt{virtualenv}}
-\label{virtual_environment:introducing-virtualenv}
 Have you ever heard of \code{virtualenv}? The chances are that if you are a
 beginner then you might not have heard about it but if you are a
 seasoned programmer than it's a vital part of your toolset. So what
@@ -965,9 +1060,8 @@ by typing:
 \$ deactivate
 \end{Verbatim}
 
+\textbf{Bonus}
 
-\section{Bonus}
-\label{virtual_environment:bonus}
 You can use \code{smartcd} which is a library for bash and zsh and allows
 you to alter your bash (or zsh) environment as you cd. It can be really
 helpful to activate and deactivate a \code{virtualenv} when you change

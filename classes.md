@@ -17,11 +17,11 @@ Let's take a look at an example:
 class Cal(object):
     # pi is a class variable
     pi = 3.142
-    
+
     def __init__(self, radius):
         # self.radius is an instance variable
         self.radius = radius
-    
+
     def area(self):
         return self.pi * (self.radius ** 2)
 
@@ -49,10 +49,10 @@ There are not much issues while using mutable class variables. This is the major
 ```python
 class SuperClass(object):
     superpowers = []
-    
+
     def __init__(self, name):
         self.name = name
-    
+
     def add_superpower(self, power):
         self.superpowers.append(power)
 
@@ -87,7 +87,7 @@ A very basic example is:
 class OldClass():
     def __init__(self):
         print('I am an old class')
-        
+
 class NewClass(object):
     def __init__(self):
         print('I am a jazzy new class')
@@ -123,7 +123,7 @@ a = GetTest()
 # Output: Greetings!!
 
 a.another_method()
-# Output: I am another method which is not automatically 
+# Output: I am another method which is not automatically
 # called
 ```
 
@@ -149,7 +149,7 @@ TypeError: __init__() takes exactly 2 arguments (1 given)
 
 I am sure that now you understand the `__init__` method.
 
-- `__getitem__` 
+- `__getitem__`
 
 Implementing __getitem__ in a class allows its instances to use the [] (indexer) operator. Here is an example:
 
@@ -161,7 +161,7 @@ class GetTest(object):
             'country':'Pakistan',
             'number':12345812
         }
-        
+
     def __getitem__(self,i):
         return self.info[i]
 
@@ -182,3 +182,7 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: 'GetTest' object has no attribute '__getitem__'
 ```
+
+
+####Static, Class & Abstract methods
+

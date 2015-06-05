@@ -14,7 +14,7 @@
 \usepackage{flaskstyle}
 
 \title{Python Tips}
-\date{April 30, 2015}
+\date{June 06, 2015}
 \release{0.1}
 \author{Muhammad Yasoob Ullah Khalid}
 \newcommand{\sphinxlogo}{\includegraphics{logo-full.png}\par}
@@ -1116,6 +1116,9 @@ The ones which we will talk about are:
 \item {} 
 \code{deque}
 
+\item {} 
+\code{namedtuple}
+
 \end{itemize}
 
 
@@ -1300,6 +1303,90 @@ new values:
 
 This was just a quick drive through the \code{collections} module. Make
 sure you read the official documentation after reading this.
+
+
+\section{4.\texttt{namedtuple}}
+\label{collections:namedtuple}
+You might already be acquainted with tuples. A tuple is a lightweight
+object type which allows to store a sequence of immutable Python
+objects. They are just like lists but have a few key differences. The
+major one is that unlike lists, \textbf{you can not change a value in a
+tuple}. In order to access the value in a tuple you use integer indexes
+like:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{man} \PYG{o}{=} \PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Ali}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+m+mi}{30}\PYG{p}{)}
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{man}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: Ali}
+\end{Verbatim}
+
+Well, so now what are \code{namedtuples}? They turn tuples into convenient
+containers for simple tasks. With namedtuples you don't have to use
+integer indexes for accessing members of a tuple. You can think of
+namedtuples like dictionaries but unlike dictionaries they are
+immutable.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{namedtuple}
+
+\PYG{n}{Animal} \PYG{o}{=} \PYG{n}{namedtuple}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Animal}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{name age type}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{perry} \PYG{o}{=} \PYG{n}{Animal}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{perry}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{age}\PYG{o}{=}\PYG{l+m+mi}{31}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cat}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{perry}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: Animal(name=\PYGZsq{}perry\PYGZsq{}, age=31, type=\PYGZsq{}cat\PYGZsq{})}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{perry}\PYG{o}{.}\PYG{n}{name}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: \PYGZsq{}perry\PYGZsq{}}
+\end{Verbatim}
+
+As you can see that now we can access members of a tuple just by their
+name using a \code{.}. Let's disect it a little more. A named tuple has two
+required arguments. They are the tuple name and the tuple field\_names.
+In the above example our tuple name was `Animal' and the tuple
+field\_names were `name', `age' and `cat'. Namedtuple makes your tuples
+\textbf{self-document}. You can easily understand what is going on by having
+a quick glance at your code. And as you are not bound to use integer
+indexes to access members of a tuple, it makes it more easy to maintain
+your code. Moreover, as \textbf{{}`{}`namedtuple{}`{}` instances do not have
+per-instance dictionaries}, they are lightweight and require no more
+memory than regular tuples. This makes them faster than dictionaries.
+However, do remember that as with tuples, \textbf{attributes in namedtuples
+are immutable}. It means that this would not work:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{namedtuple}
+
+\PYG{n}{Animal} \PYG{o}{=} \PYG{n}{namedtuple}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Animal}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{name age type}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{perry} \PYG{o}{=} \PYG{n}{Animal}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{perry}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{age}\PYG{o}{=}\PYG{l+m+mi}{31}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cat}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{perry}\PYG{o}{.}\PYG{n}{age} \PYG{o}{=} \PYG{l+m+mi}{42}
+
+\PYG{c}{\PYGZsh{} Output: Traceback (most recent call last):}
+\PYG{c}{\PYGZsh{}            File \PYGZdq{}\PYGZdq{}, line 1, in}
+\PYG{c}{\PYGZsh{}         AttributeError: can\PYGZsq{}t set attribute}
+\end{Verbatim}
+
+You should use named tuples to make your code self-documenting. \textbf{They
+are backwards compatible with normal tuples}. It means that you can use
+integer indexes with namedtuples as well:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{namedtuple}
+
+\PYG{n}{Animal} \PYG{o}{=} \PYG{n}{namedtuple}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Animal}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{name age type}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{perry} \PYG{o}{=} \PYG{n}{Animal}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{perry}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{age}\PYG{o}{=}\PYG{l+m+mi}{31}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cat}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{perry}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: perry}
+\end{Verbatim}
+
+Last but not the least, you can convert a namedtuple to a dictionary.
+Like this:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{namedtuple}
+
+\PYG{n}{Animal} \PYG{o}{=} \PYG{n}{namedtuple}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Animal}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{name age type}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{perry} \PYG{o}{=} \PYG{n}{Animal}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{perry}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{age}\PYG{o}{=}\PYG{l+m+mi}{31}\PYG{p}{,} \PYG{n+nb}{type}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{cat}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}
 
 
 \chapter{Enumerate}
@@ -1767,26 +1854,43 @@ website}
 
 \chapter{For - Else}
 \label{for_-_else:for-else}\label{for_-_else::doc}
-\code{for} loops are an important feature of Python. However there are a
-few things which most beginners do not know about them. We will discuss
-a few of them one by one.
+Loops are an integral part of any language. Likewise \code{for} loops are
+an important part of Python. However there are a few things which most
+beginners do not know about them. We will discuss a few of them one by
+one.
+
+Let's first start of by what we know. We know that we can use for loops
+like this:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{fruits} \PYG{o}{=} \PYG{p}{[}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{apple}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{banana}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{mango}\PYG{l+s}{\PYGZsq{}}\PYG{p}{]}
+\PYG{k}{for} \PYG{n}{fruit} \PYG{o+ow}{in} \PYG{n}{fruits}\PYG{p}{:}
+    \PYG{k}{print} \PYG{n}{fruit}\PYG{o}{.}\PYG{n}{capitalize}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{c}{\PYGZsh{} Output: Apple}
+\PYG{c}{\PYGZsh{}         Banana}
+\PYG{c}{\PYGZsh{}         Mango}
+\end{Verbatim}
+
+That is the very basic structure of a for loop. Now let's move on to
+some of the lesser known features of \code{for} loops in Python.
 
 
 \section{1.\texttt{else} clause:}
 \label{for_-_else:else-clause}
 For loops also have an \code{else} clause which most of us are unfamiliar
-with. The \code{else} clause is run when the loop completes normally. This
-means that the loop did not encounter \code{break}. They are really useful
-once you understand where to use them. I myself came to know about them
-a lot later.
+with. The \code{else} clause executes when the loop completes normally.
+This means that the loop did not encounter any \code{break}. They are
+really useful once you understand where to use them. I myself came to
+know about them a lot later.
 
 The common construct is to run a loop and search for an item. If the
-item is found we break the loop using \code{break}. There are two scenarios
-in which the loop may end. The first one is when the item is found and
-\code{break} is encountered. The second scenario is that the loop ends. Now
-we may want to know which one of these is the reason for a loops
-completion. One method is to set a flag and then check it once the loop
-ends. Another is to use the \code{else} clause.
+item is found, we break the loop using \code{break}. There are two
+scenarios in which the loop may end. The first one is when the item is
+found and \code{break} is encountered. The second scenario is that the loop
+ends. Now we may want to know which one of these is the reason for a
+loops completion. One method is to set a flag and then check it once the
+loop ends. Another is to use the \code{else} clause.
 
 This is the basic structure of a \code{for/else} loop:
 \DUspan{keyword}{}\DUspan{name}{}\DUspan{operator,word}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{keyword}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{name}{}\DUspan{punctuation}{}
@@ -2221,6 +2325,175 @@ is a generic cache:
 
 \PYG{n}{fibonacci}\PYG{p}{(}\PYG{l+m+mi}{25}\PYG{p}{)}
 \end{Verbatim}
+
+
+\chapter{Context managers}
+\label{context_managers:context-managers}\label{context_managers::doc}
+Context managers allow you to allocate and release resources precisely
+when you want to. The most widely used example of context managers is
+the \code{with} statement. Suppose you have two related operations which
+you’d like to execute as a pair, with a block of code in between.
+Context managers allow you to do specifically that. For example:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{with} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{some\PYGZus{}file}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{wb}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{opened\PYGZus{}file}\PYG{p}{:}
+    \PYG{n}{opened\PYGZus{}file}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Hola!}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}
+
+The above code opens the file, writes some data to it and then closes
+it. If an error occurs while writing the data to the file, it tries to
+close it. The above code is equivalent to:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nb}{file} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{some\PYGZus{}file}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{wb}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\PYG{k}{try}\PYG{p}{:}
+    \PYG{n+nb}{file}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Hola!}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\PYG{k}{finally}\PYG{p}{:}
+    \PYG{n+nb}{file}\PYG{o}{.}\PYG{n}{close}\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+While comparing it to the first example we can see that a lot of
+boilerplate code is eliminated just by using \code{with}. The main
+advantage of using a \code{with} statement is that it makes sure our file
+is closed without paying attention to how the nested block exits.
+
+A common use case of context managers is locking and unlocking resources
+and closing opened files (as I have already showed you).
+
+Let's see how we can implement our own Context Manager. This would allow
+us to understand exactly what's going on behind the scenes.
+
+
+\section{Implementing Context Manager as a Class:}
+\label{context_managers:implementing-context-manager-as-a-class}
+At the very least a context manager has an \code{\_\_enter\_\_} and
+\code{\_\_exit\_\_} methods defined. Let's make our own file opening Context
+Manager and learn the basics.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{File}\PYG{p}{(}\PYG{n+nb}{object}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{file\PYGZus{}name}\PYG{p}{,} \PYG{n}{method}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}obj} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{file\PYGZus{}name}\PYG{p}{,} \PYG{n}{method}\PYG{p}{)}
+    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}enter\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}obj}
+    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}exit\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb}{type}\PYG{p}{,} \PYG{n}{value}\PYG{p}{,} \PYG{n}{trace\PYGZus{}back}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}obj}\PYG{o}{.}\PYG{n}{close}\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+Just by defining \code{\_\_enter\_\_} and \code{\_\_exit\_\_} methods we can use it in
+a \code{with} statement. Let's try:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{with} \PYG{n}{File}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{demo.txt}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{wb}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{opened\PYGZus{}file}\PYG{p}{:}
+    \PYG{n}{opened\PYGZus{}file}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Hola!}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}
+
+Our \code{\_\_exit\_\_} function accepts three arguments. They are required by
+every \code{\_\_exit\_\_} method which is a part of a Context Manager class.
+Let's talk about what happens under-the-hood.
+\begin{enumerate}
+\item {} 
+The \code{with} statement stores the \code{\_\_exit\_\_} method of \code{File}
+class.
+
+\item {} 
+It calls the \code{\_\_enter\_\_} method of \code{File} class.
+
+\item {} 
+\code{\_\_enter\_\_} method opens the file and returns it.
+
+\item {} 
+the opened file handle is passed to \code{opened\_file}.
+
+\item {} 
+we write to the file using \code{.write()}
+
+\item {} 
+\code{with} statement calls the stored \code{\_\_exit\_\_} method.
+
+\item {} 
+the \code{\_\_exit\_\_} method closes the file.
+
+\end{enumerate}
+
+
+\section{Handling exceptions}
+\label{context_managers:handling-exceptions}
+We did not talk about the \code{type}, \code{value} and \code{trace\_back}
+arguments of the \code{\_\_exit\_\_} method. Between the 4th and 6th step, if
+an exception occurs, Python passes the type, value and traceback of the
+exception to the \code{\_\_exit\_\_} method. It allows the \code{\_\_exit\_\_} method
+to decide how to close the file and if any further steps are required.
+In our case we are not paying any attention to them.
+
+What if our file object raises an exception? We might be trying to
+access a method on the file object which it does not supports. For
+instance:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{with} \PYG{n}{File}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{demo.txt}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{wb}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{opened\PYGZus{}file}\PYG{p}{:}
+    \PYG{n}{opened\PYGZus{}file}\PYG{o}{.}\PYG{n}{fuck}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{Hola!}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}
+
+Let's list down the steps which are taken by the \code{with} statement when
+an error is encountered.
+\begin{enumerate}
+\item {} 
+It passes the type, value and traceback of the error to the
+\code{\_\_exit\_\_} method.
+
+\item {} 
+It allows the \code{\_\_exit\_\_} method to handle the exception.
+
+\item {} 
+If \code{\_\_exit\_\_} returns True then the exception was gracefully
+handled.
+
+\item {} 
+If anything else than True is returned by \code{\_\_exit\_\_} method then
+the exception is raised by \code{with} statement.
+
+\end{enumerate}
+
+In our case the \code{\_\_exit\_\_} method returns \code{None} (when no return
+statement is encountered then the method returns \code{None}). Therefore,
+\code{with} statement raises the exception.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+Traceback (most recent call last):
+  File "\textless{}stdin\textgreater{}", line 2, in \textless{}module\textgreater{}
+AttributeError: 'file' object has no attribute 'fuck'
+\end{Verbatim}
+
+Let's try handling the exception in the \code{\_\_exit\_\_} method:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{class} \PYG{n+nc}{File}\PYG{p}{(}\PYG{n+nb}{object}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{file\PYGZus{}name}\PYG{p}{,} \PYG{n}{method}\PYG{p}{)}\PYG{p}{:}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}obj} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{file\PYGZus{}name}\PYG{p}{,} \PYG{n}{method}\PYG{p}{)}
+    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}enter\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}obj}
+    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}exit\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb}{type}\PYG{p}{,} \PYG{n}{value}\PYG{p}{,} \PYG{n}{trace\PYGZus{}back}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{Exception has been handled}\PYG{l+s}{\PYGZdq{}}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{file\PYGZus{}obj}\PYG{o}{.}\PYG{n}{close}\PYG{p}{(}\PYG{p}{)}
+        \PYG{k}{return} \PYG{n+nb+bp}{True}
+
+\PYG{k}{with} \PYG{n}{File}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{demo.txt}\PYG{l+s}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{wb}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{opened\PYGZus{}file}\PYG{p}{:}
+    \PYG{n}{opened\PYGZus{}file}\PYG{o}{.}\PYG{n}{fuck}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{c}{\PYGZsh{} Output: Exception has been handled}
+\end{Verbatim}
+
+Our \code{\_\_exit\_\_} method returned True, therefore no exception was raised
+by the \code{with} statement.
+
+This is not the only way to implement context managers. There is another
+way and we will be looking at it in this next section.
+
+
+\section{Implementing a Context Manager as a Generator}
+\label{context_managers:implementing-a-context-manager-as-a-generator}
+TODO: \href{http://preshing.com/20110920/the-python-with-statement-by-example/}{http://preshing.com/20110920/the-python-with-statement-by-example/}
 
 
 

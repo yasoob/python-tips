@@ -27,4 +27,5 @@ Summary
 -  `Coroutines <coroutines.md>`__
 -  `Mutation <mutation.md>`__
 -  `Classes <classes.md>`__
+-  `Context managers <context_managers.md>`__
 

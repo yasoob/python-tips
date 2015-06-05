@@ -48,3 +48,4 @@ Please note that this book is not a tutorial and does not teach you Python. Inst
    targeting_python_2_3
    coroutines
    function_caching
+   context_managers

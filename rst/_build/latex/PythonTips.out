@@ -27,24 +27,29 @@
 \BOOKMARK [1][-]{section.12.1}{1.defaultdict}{chapter.12}% 27
 \BOOKMARK [1][-]{section.12.2}{2.counter}{chapter.12}% 28
 \BOOKMARK [1][-]{section.12.3}{3.deque}{chapter.12}% 29
-\BOOKMARK [0][-]{chapter.13}{Enumerate}{part.2}% 30
-\BOOKMARK [0][-]{chapter.14}{Object introspection}{part.2}% 31
-\BOOKMARK [1][-]{section.14.1}{1.dir\(\) BIF}{chapter.14}% 32
-\BOOKMARK [1][-]{section.14.2}{2.type\(\) and id\(\)}{chapter.14}% 33
-\BOOKMARK [1][-]{section.14.3}{3.inspect module}{chapter.14}% 34
-\BOOKMARK [0][-]{chapter.15}{Comprehensions}{part.2}% 35
-\BOOKMARK [1][-]{section.15.1}{list comprehensions}{chapter.15}% 36
-\BOOKMARK [1][-]{section.15.2}{dict comprehensions}{chapter.15}% 37
-\BOOKMARK [1][-]{section.15.3}{set comprehensions}{chapter.15}% 38
-\BOOKMARK [0][-]{chapter.16}{Exceptions}{part.2}% 39
-\BOOKMARK [1][-]{section.16.1}{Handling multiple exceptions:}{chapter.16}% 40
-\BOOKMARK [0][-]{chapter.17}{Lambdas}{part.2}% 41
-\BOOKMARK [0][-]{chapter.18}{One Liners}{part.2}% 42
-\BOOKMARK [0][-]{chapter.19}{For - Else}{part.2}% 43
-\BOOKMARK [1][-]{section.19.1}{1.else clause:}{chapter.19}% 44
-\BOOKMARK [0][-]{chapter.20}{Open function}{part.2}% 45
-\BOOKMARK [0][-]{chapter.21}{Targeting Python 2+3}{part.2}% 46
-\BOOKMARK [0][-]{chapter.22}{Coroutines}{part.2}% 47
-\BOOKMARK [0][-]{chapter.23}{Function caching}{part.2}% 48
-\BOOKMARK [1][-]{section.23.1}{Python 3.2+}{chapter.23}% 49
-\BOOKMARK [1][-]{section.23.2}{Python 2+}{chapter.23}% 50
+\BOOKMARK [1][-]{section.12.4}{4.namedtuple}{chapter.12}% 30
+\BOOKMARK [0][-]{chapter.13}{Enumerate}{part.2}% 31
+\BOOKMARK [0][-]{chapter.14}{Object introspection}{part.2}% 32
+\BOOKMARK [1][-]{section.14.1}{1.dir\(\) BIF}{chapter.14}% 33
+\BOOKMARK [1][-]{section.14.2}{2.type\(\) and id\(\)}{chapter.14}% 34
+\BOOKMARK [1][-]{section.14.3}{3.inspect module}{chapter.14}% 35
+\BOOKMARK [0][-]{chapter.15}{Comprehensions}{part.2}% 36
+\BOOKMARK [1][-]{section.15.1}{list comprehensions}{chapter.15}% 37
+\BOOKMARK [1][-]{section.15.2}{dict comprehensions}{chapter.15}% 38
+\BOOKMARK [1][-]{section.15.3}{set comprehensions}{chapter.15}% 39
+\BOOKMARK [0][-]{chapter.16}{Exceptions}{part.2}% 40
+\BOOKMARK [1][-]{section.16.1}{Handling multiple exceptions:}{chapter.16}% 41
+\BOOKMARK [0][-]{chapter.17}{Lambdas}{part.2}% 42
+\BOOKMARK [0][-]{chapter.18}{One Liners}{part.2}% 43
+\BOOKMARK [0][-]{chapter.19}{For - Else}{part.2}% 44
+\BOOKMARK [1][-]{section.19.1}{1.else clause:}{chapter.19}% 45
+\BOOKMARK [0][-]{chapter.20}{Open function}{part.2}% 46
+\BOOKMARK [0][-]{chapter.21}{Targeting Python 2+3}{part.2}% 47
+\BOOKMARK [0][-]{chapter.22}{Coroutines}{part.2}% 48
+\BOOKMARK [0][-]{chapter.23}{Function caching}{part.2}% 49
+\BOOKMARK [1][-]{section.23.1}{Python 3.2+}{chapter.23}% 50
+\BOOKMARK [1][-]{section.23.2}{Python 2+}{chapter.23}% 51
+\BOOKMARK [0][-]{chapter.24}{Context managers}{part.2}% 52
+\BOOKMARK [1][-]{section.24.1}{Implementing Context Manager as a Class:}{chapter.24}% 53
+\BOOKMARK [1][-]{section.24.2}{Handling exceptions}{chapter.24}% 54
+\BOOKMARK [1][-]{section.24.3}{Implementing a Context Manager as a Generator}{chapter.24}% 55

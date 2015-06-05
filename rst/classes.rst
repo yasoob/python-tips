@@ -27,11 +27,11 @@ Let's take a look at an example:
     class Cal(object):
         # pi is a class variable
         pi = 3.142
-        
+
         def __init__(self, radius):
             # self.radius is an instance variable
             self.radius = radius
-        
+
         def area(self):
             return self.pi * (self.radius ** 2)
 
@@ -63,10 +63,10 @@ check the next example.
 
     class SuperClass(object):
         superpowers = []
-        
+
         def __init__(self, name):
             self.name = name
-        
+
         def add_superpower(self, power):
             self.superpowers.append(power)
 
@@ -109,7 +109,7 @@ A very basic example is:
     class OldClass():
         def __init__(self):
             print('I am an old class')
-            
+
     class NewClass(object):
         def __init__(self):
             print('I am a jazzy new class')
@@ -154,7 +154,7 @@ it's ``__init__`` method. For instance:
     # Output: Greetings!!
 
     a.another_method()
-    # Output: I am another method which is not automatically 
+    # Output: I am another method which is not automatically
     # called
 
 You can see that ``__init__`` is called immediately after an instance is
@@ -195,7 +195,7 @@ Implementing **getitem** in a class allows its instances to use the []
                 'country':'Pakistan',
                 'number':12345812
             }
-            
+
         def __getitem__(self,i):
             return self.info[i]
 
@@ -215,4 +215,7 @@ Without the ``__getitem__`` method we would have got this error:
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
     TypeError: 'GetTest' object has no attribute '__getitem__'
+
+Static, Class & Abstract methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

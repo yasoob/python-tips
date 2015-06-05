@@ -7,6 +7,7 @@ The ones which we will talk about are:
 - `defaultdict`
 - `counter`
 - `deque`
+- `namedtuple`
 
 ####1.`defaultdict`
 
@@ -169,3 +170,5 @@ print(d)
 
 This was just a quick drive through the `collections` module. Make sure you read the official documentation after reading this.
 
+####4.`namedtuple`
+It is essentially a tuple 

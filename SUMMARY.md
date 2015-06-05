@@ -26,5 +26,4 @@
 * [Coroutines](coroutines.md)
 * [Mutation](mutation.md)
 * [Classes](classes.md)
-* [Namedtuple](namedtuple.md)
 

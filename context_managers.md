@@ -130,5 +130,7 @@ with open_file('some_file') as f:
     f.write('hola!')
 ```
 
+What does the Python interpretter do when it reaches the with statement?  
+
 TODO: http://preshing.com/20110920/the-python-with-statement-by-example/
 

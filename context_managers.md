@@ -103,5 +103,7 @@ This is not the only way to implement context managers. There is another way and
 
 ####Implementing a Context Manager as a Generator
 
+We can also implement Context Managers using decorators and generators. Python has a contexlib for this very purpose.
+
 TODO: http://preshing.com/20110920/the-python-with-statement-by-example/
 

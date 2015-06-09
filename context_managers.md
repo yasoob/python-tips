@@ -113,7 +113,19 @@ def open_file(name):
     f = open(name, 'wb')
     yield f
     f.close()
-    
+```
+Okay! This way of implementing Context Managers appear to be more intuitive and easy. However, this method requires some knowledge about generators, yield and decorators. In this example we have not caught any exceptions which might occur. It works in mostly the same way as the previous method.
+
+Let's disect this method a little. 
+
+1. Python encounters the `yield` keyword. Due to this it creates a generator instead of a normal function.
+2. Due to the decoration, contextmanager is called with the function name (open_file) as it's argument.
+3. The `contextmanager` function returns the generator wrapped by the `GeneratorContextManager` object.
+4. The `GeneratorContextManager` is assigned to the `open_file` function. Therefore, when we later call `open_file` function, we are actually calling the `GeneratorContextManager` object.
+
+So now that we know all this, we can use the newly generated Context Manager like this:
+
+```
 with open_file('some_file') as f:
     f.write('hola!')
 ```

@@ -103,7 +103,20 @@ This is not the only way to implement context managers. There is another way and
 
 ####Implementing a Context Manager as a Generator
 
-We can also implement Context Managers using decorators and generators. Python has a contexlib for this very purpose.
+We can also implement Context Managers using decorators and generators. Python has a contextlib module for this very purpose. Instead of a class, we can implement a Context Manager using a generator function. Let's see a basic, useless example:
+
+```
+from contextlib import contextmanager
+
+@contextmanager
+def open_file(name):
+    f = open(name, 'wb')
+    yield f
+    f.close()
+    
+with open_file('some_file') as f:
+    f.write('hola!')
+```
 
 TODO: http://preshing.com/20110920/the-python-with-statement-by-example/
 

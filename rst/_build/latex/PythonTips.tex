@@ -14,7 +14,7 @@
 \usepackage{flaskstyle}
 
 \title{Python Tips}
-\date{June 06, 2015}
+\date{June 12, 2015}
 \release{0.1}
 \author{Muhammad Yasoob Ullah Khalid}
 \newcommand{\sphinxlogo}{\includegraphics{logo-full.png}\par}
@@ -716,6 +716,235 @@ to make our code shorter and more Pythonic. Most of the beginners do not
 know where to use them so I am going to share some areas where
 decorators can make your code consise.
 
+Firstly let's discuss how to write your own decorator.
+
+It is perhaps one of the most difficult concept to grasp. We will take
+it one step at a time so that you can fully inderstand it.
+
+
+\section{Everything in python is an object:}
+\label{decorators:everything-in-python-is-an-object}
+First of all let's understand functions in python:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{hi}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{yasoob}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{return} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{hi }\PYG{l+s}{\PYGZdq{}}\PYG{o}{+}\PYG{n}{name}
+
+\PYG{k}{print} \PYG{n}{hi}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}output: \PYGZsq{}hi yasoob\PYGZsq{}}
+
+\PYG{c}{\PYGZsh{}We can even assign a function to a variable like}
+\PYG{n}{greet} \PYG{o}{=} \PYG{n}{hi}
+\PYG{c}{\PYGZsh{}We are not using parentheses here because we are not calling the function hi}
+\PYG{c}{\PYGZsh{}instead we are just putting it into the greet variable. Let\PYGZsq{}s try to run this}
+
+\PYG{k}{print} \PYG{n}{greet}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}output: \PYGZsq{}hi yasoob\PYGZsq{}}
+
+\PYG{c}{\PYGZsh{}lets see what happens if we delete the old hi function!}
+\PYG{k}{del} \PYG{n}{hi}
+\PYG{k}{print} \PYG{n}{hi}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}outputs: NameError}
+
+\PYG{k}{print} \PYG{n}{greet}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}outputs: \PYGZsq{}hi yasoob\PYGZsq{}}
+\end{Verbatim}
+
+
+\section{Defining functions within functions:}
+\label{decorators:defining-functions-within-functions}
+So those are the basics when it comes to functions. Lets take your
+knowledge one step further. In Python we can define functions inside
+other functions:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{hi}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{yasoob}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{now you are inside the hi() function}\PYG{l+s}{\PYGZdq{}}
+
+    \PYG{k}{def} \PYG{n+nf}{greet}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{now you are in the greet() function}\PYG{l+s}{\PYGZdq{}}
+
+    \PYG{k}{def} \PYG{n+nf}{welcome}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{now you are in the welcome() function}\PYG{l+s}{\PYGZdq{}}
+
+    \PYG{k}{print} \PYG{n}{greet}\PYG{p}{(}\PYG{p}{)}
+    \PYG{k}{print} \PYG{n}{welcome}\PYG{p}{(}\PYG{p}{)}
+    \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{now you are back in the hi() function}\PYG{l+s}{\PYGZdq{}}
+
+\PYG{n}{hi}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}output:now you are inside the hi() function}
+\PYG{c}{\PYGZsh{}       now you are in the greet() function}
+\PYG{c}{\PYGZsh{}       now you are in the welcome() function}
+\PYG{c}{\PYGZsh{}       now you are back in the hi() function}
+
+\PYG{c}{\PYGZsh{} This shows that whenever you call hi(), greet() and welcome()}
+\PYG{c}{\PYGZsh{} are also called. However the greet() and welcome() functions}
+\PYG{c}{\PYGZsh{} are not available outsite the hi() function e.g:}
+
+\PYG{n}{greet}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}outputs: NameError: name \PYGZsq{}greet\PYGZsq{} is not defined}
+\end{Verbatim}
+
+So now we know that we can define functions in other functions. In
+simpler words we can make nested functions. Now you need to learn one
+more thing that functions can return functions too.
+
+
+\section{Returning functions from within functions:}
+\label{decorators:returning-functions-from-within-functions}
+It is not necessary to execute a function within another function, we
+can return it as an output as well:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{hi}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s}{\PYGZdq{}}\PYG{l+s}{yasoob}\PYG{l+s}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{def} \PYG{n+nf}{greet}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{now you are in the greet() function}\PYG{l+s}{\PYGZdq{}}
+
+    \PYG{k}{def} \PYG{n+nf}{welcome}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{now you are in the welcome() function}\PYG{l+s}{\PYGZdq{}}
+
+    \PYG{k}{if} \PYG{n}{name} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{yasoob}\PYG{l+s}{\PYGZdq{}}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n}{greet}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n}{welcome}
+
+\PYG{n}{a} \PYG{o}{=} \PYG{n}{hi}\PYG{p}{(}\PYG{p}{)}
+\PYG{k}{print} \PYG{n}{a}
+\PYG{c}{\PYGZsh{}outputs: \PYGZlt{}function greet at 0x7f2143c01500\PYGZgt{}}
+
+\PYG{c}{\PYGZsh{}This clearly shows that {}`a{}` now points to the greet() function in hi()}
+\PYG{c}{\PYGZsh{}Now try this}
+
+\PYG{k}{print} \PYG{n}{a}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}outputs: now you are in the greet() function}
+\end{Verbatim}
+
+Just take a look at the code again. In the \code{if/else} clause we are
+returning \code{greet} and \code{welcome}, not \code{greet()} and \code{welcome()}.
+Why is that? It is so because when you put parentheses around it the
+function gets executed whereas if you don't put parenthesis around it
+then it can be passed around and can be assigned to other variables
+without executing it. Did you get it ? Let me explain it a little bit in
+more detail. When we write \code{a = hi()}, \code{hi()} gets executed and
+because the name is yasoob by default, the function greet is returned.
+If we change the statement to \code{a = hi(name = "ali")} then the welcome
+function will be returned. We can also do print \code{hi()()} which outputs
+\emph{now you are in the greet() function}.
+
+
+\section{Giving a function as an argument to another function:}
+\label{decorators:giving-a-function-as-an-argument-to-another-function}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{hi}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{return} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{hi yasoob!}\PYG{l+s}{\PYGZdq{}}
+
+\PYG{k}{def} \PYG{n+nf}{doSomethingBeforeHi}\PYG{p}{(}\PYG{n}{func}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{I am doing some  boring work before executing hi()}\PYG{l+s}{\PYGZdq{}}
+    \PYG{k}{print} \PYG{n}{func}\PYG{p}{(}\PYG{p}{)}
+
+\PYG{n}{doSomethingBeforeHi}\PYG{p}{(}\PYG{n}{hi}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}outputs:I am doing some  boring work before executing hi()}
+\PYG{c}{\PYGZsh{}        hi yasoob!}
+\end{Verbatim}
+
+Now you have all the required knowledge to learn what decorators really
+are. Decorators let you execute code before and after a function.
+
+
+\section{Writing your first decorator:}
+\label{decorators:writing-your-first-decorator}
+In the last example we actually made a decorator! Lets modify the
+previous decorator and make a little bit more usable program:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{a\PYGZus{}new\PYGZus{}decorator}\PYG{p}{(}\PYG{n}{a\PYGZus{}func}\PYG{p}{)}\PYG{p}{:}
+
+    \PYG{k}{def} \PYG{n+nf}{wrapTheFunction}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{I am doing some  boring work before executing a\PYGZus{}func()}\PYG{l+s}{\PYGZdq{}}
+
+        \PYG{n}{a\PYGZus{}func}\PYG{p}{(}\PYG{p}{)}
+
+        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{I am doing some boring work after executing a\PYGZus{}func()}\PYG{l+s}{\PYGZdq{}}
+
+    \PYG{k}{return} \PYG{n}{wrapTheFunction}
+
+\PYG{k}{def} \PYG{n+nf}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+    \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{I am the function which needs some decoration to remove my foul smell}\PYG{l+s}{\PYGZdq{}}
+
+\PYG{n}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}outputs: \PYGZdq{}I am the function which needs some decoration to remove my foul smell\PYGZdq{}}
+
+\PYG{n}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration} \PYG{o}{=} \PYG{n}{a\PYGZus{}new\PYGZus{}decorator}\PYG{p}{(}\PYG{n}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}now a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration is wrapped by wrapTheFunction()}
+
+\PYG{n}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}outputs:I am doing some  boring work before executing a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration()}
+\PYG{c}{\PYGZsh{}        I am the function which needs some decoration to remove my foul smell}
+\PYG{c}{\PYGZsh{}        I am doing some boring work after executing a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration()}
+\end{Verbatim}
+
+Did you get it? We just applied the previously learned principles. This
+is exactly what the decorators do in python! They wrap a function and
+modify its behaviour in one way or the another. Now you might be
+wondering that we did not use the @ anywhere in our code? That is just a
+short way of making up a decorated function. Here is how we could have
+run the previous code sample using @.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nd}{@a\PYGZus{}new\PYGZus{}decorator}
+\PYG{k}{def} \PYG{n+nf}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Hey yo! Decorate me!\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{I am the function which needs some decoration to }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s}{    remove my foul smell}\PYG{l+s}{\PYGZdq{}}
+
+\PYG{n}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{p}{(}\PYG{p}{)}
+\PYG{c}{\PYGZsh{}outputs: I am doing some  boring work before executing a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration()}
+\PYG{c}{\PYGZsh{}         I am the function which needs some decoration to remove my foul smell}
+\PYG{c}{\PYGZsh{}         I am doing some boring work after executing a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration()}
+
+\PYG{c}{\PYGZsh{}the @a\PYGZus{}new\PYGZus{}decorator is just a short way of saying:}
+\PYG{n}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration} \PYG{o}{=} \PYG{n}{a\PYGZus{}new\PYGZus{}decorator}\PYG{p}{(}\PYG{n}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{p}{)}
+\end{Verbatim}
+
+I hope you now have a basic understanding of how decorators work in
+Python. Now there is one problem with our code. If we run:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: wrapTheFunction}
+\end{Verbatim}
+
+That's not what we expected! It's name is
+``a\_function\_requiring\_decoration''. Well our function was replaced by
+wrapTheFunction. It overrided the name and docstring of our function.
+Luckily Python provides us a simple function to solve this problem and
+that is \code{functools.wraps}. Let's modify our previous example to use
+\code{functools.wraps}:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{functools} \PYG{k+kn}{import} \PYG{n}{wraps}
+
+\PYG{k}{def} \PYG{n+nf}{a\PYGZus{}new\PYGZus{}decorator}\PYG{p}{(}\PYG{n}{a\PYGZus{}func}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n+nd}{@wraps}\PYG{p}{(}\PYG{n}{a\PYGZus{}func}\PYG{p}{)}
+    \PYG{k}{def} \PYG{n+nf}{wrapTheFunction}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{I am doing some  boring work before executing a\PYGZus{}func()}\PYG{l+s}{\PYGZdq{}}
+        \PYG{n}{a\PYGZus{}func}\PYG{p}{(}\PYG{p}{)}
+        \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{I am doing some boring work after executing a\PYGZus{}func()}\PYG{l+s}{\PYGZdq{}}
+    \PYG{k}{return} \PYG{n}{wrapTheFunction}
+
+\PYG{n+nd}{@a\PYGZus{}new\PYGZus{}decorator}
+\PYG{k}{def} \PYG{n+nf}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}Hey yo! Decorate me!\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{print} \PYG{l+s}{\PYGZdq{}}\PYG{l+s}{I am the function which needs some decoration to }\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s}{    remove my foul smell}\PYG{l+s}{\PYGZdq{}}
+
+\PYG{k}{print}\PYG{p}{(}\PYG{n}{a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}\PYG{o}{.}\PYG{n}{\PYGZus{}\PYGZus{}name\PYGZus{}\PYGZus{}}\PYG{p}{)}
+\PYG{c}{\PYGZsh{} Output: a\PYGZus{}function\PYGZus{}requiring\PYGZus{}decoration}
+\end{Verbatim}
+
+Now that is much better. Let's move on and learn some use-cases of
+decorators.
+
 \textbf{Blueprint :}
 \DUspan{keyword,namespace}{}\DUspan{name,namespace}{}\DUspan{keyword,namespace}{}\DUspan{name}{}\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{name,decorator}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{operator,word}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{literal,string}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{name,decorator}{}\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{literal,string}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{name,builtin,pseudo}{}\DUspan{keyword}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{name,builtin,pseudo}{}\DUspan{keyword}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{comment}{}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -747,7 +976,13 @@ list, etc. This allows to access the pre-decorated function's properties
 in the decorator.
 
 
-\section{Authorization}
+\subsection{Use-cases:}
+\label{decorators:use-cases}
+Now let's take a look at the areas where decorators really shine and
+their usage makes something really easy to manage.
+
+
+\section{1. Authorization}
 \label{decorators:authorization}
 Decorators can help to check whether someone is authorized to use an
 endpoint in a web application. They are extensively used in Flask web
@@ -770,7 +1005,7 @@ authentication:
 \end{Verbatim}
 
 
-\section{Logging}
+\section{2. Logging}
 \label{decorators:logging}
 Logging is another area where the decorators shine. Here is an example:
 \DUspan{keyword,namespace}{}\DUspan{name,namespace}{}\DUspan{keyword,namespace}{}\DUspan{name}{}\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{name,decorator}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{literal,string}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{name,decorator}{}\DUspan{keyword}{}\DUspan{name,function}{}\DUspan{punctuation}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{literal,string,doc}{}\DUspan{keyword}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{name}{}\DUspan{operator}{}\DUspan{name}{}\DUspan{punctuation}{}\DUspan{literal,number,integer}{}\DUspan{punctuation}{}\DUspan{comment}{}
@@ -1730,7 +1965,7 @@ before the \code{finally} clause.
 
 \chapter{Lambdas}
 \label{lambdas::doc}\label{lambdas:lambdas}
-Lambdas are one line functions. They are also known as annonymous
+Lambdas are one line functions. They are also known as anonymous
 functions in some other languages. You might want to use lambdas when
 you don't want to use a function twice in a program. They are just like
 normal functions and even behave like them.
@@ -2326,6 +2561,11 @@ is a generic cache:
 \PYG{n}{fibonacci}\PYG{p}{(}\PYG{l+m+mi}{25}\PYG{p}{)}
 \end{Verbatim}
 
+\href{https://www.caktusgroup.com/blog/2015/06/08/testing-client-side-applications-django-post-mortem/}{Here}
+is a fine article by Caktus Group in which they caught a bug in Django
+which occured due to lru\_cache. It's an interesting read. Do check it
+out.
+
 
 \chapter{Context managers}
 \label{context_managers:context-managers}\label{context_managers::doc}
@@ -2493,6 +2733,58 @@ way and we will be looking at it in this next section.
 
 \section{Implementing a Context Manager as a Generator}
 \label{context_managers:implementing-a-context-manager-as-a-generator}
+We can also implement Context Managers using decorators and generators.
+Python has a contextlib module for this very purpose. Instead of a
+class, we can implement a Context Manager using a generator function.
+Let's see a basic, useless example:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{contextlib} \PYG{k+kn}{import} \PYG{n}{contextmanager}
+
+\PYG{n+nd}{@contextmanager}
+\PYG{k}{def} \PYG{n+nf}{open\PYGZus{}file}\PYG{p}{(}\PYG{n}{name}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{f} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{name}\PYG{p}{,} \PYG{l+s}{\PYGZsq{}}\PYG{l+s}{wb}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+    \PYG{k}{yield} \PYG{n}{f}
+    \PYG{n}{f}\PYG{o}{.}\PYG{n}{close}\PYG{p}{(}\PYG{p}{)}
+\end{Verbatim}
+
+Okay! This way of implementing Context Managers appear to be more
+intuitive and easy. However, this method requires some knowledge about
+generators, yield and decorators. In this example we have not caught any
+exceptions which might occur. It works in mostly the same way as the
+previous method.
+
+Let's disect this method a little.
+\begin{enumerate}
+\item {} 
+Python encounters the \code{yield} keyword. Due to this it creates a
+generator instead of a normal function.
+
+\item {} 
+Due to the decoration, contextmanager is called with the function
+name (open\_file) as it's argument.
+
+\item {} 
+The \code{contextmanager} function returns the generator wrapped by the
+\code{GeneratorContextManager} object.
+
+\item {} 
+The \code{GeneratorContextManager} is assigned to the \code{open\_file}
+function. Therefore, when we later call \code{open\_file} function, we
+are actually calling the \code{GeneratorContextManager} object.
+
+\end{enumerate}
+
+So now that we know all this, we can use the newly generated Context
+Manager like this:
+
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{with} \PYG{n}{open\PYGZus{}file}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{some\PYGZus{}file}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)} \PYG{k}{as} \PYG{n}{f}\PYG{p}{:}
+    \PYG{n}{f}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{hola!}\PYG{l+s}{\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}
+
+What does the Python interpretter do when it reaches the with statement?
+
 TODO: \href{http://preshing.com/20110920/the-python-with-statement-by-example/}{http://preshing.com/20110920/the-python-with-statement-by-example/}
 
 

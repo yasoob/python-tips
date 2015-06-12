@@ -1,7 +1,7 @@
 Lambdas
 -------
 
-Lambdas are one line functions. They are also known as annonymous
+Lambdas are one line functions. They are also known as anonymous
 functions in some other languages. You might want to use lambdas when
 you don't want to use a function twice in a program. They are just like
 normal functions and even behave like them.

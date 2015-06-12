@@ -67,3 +67,7 @@ is a generic cache:
 
     fibonacci(25)
 
+`Here <https://www.caktusgroup.com/blog/2015/06/08/testing-client-side-applications-django-post-mortem/>`__
+is a fine article by Caktus Group in which they caught a bug in Django
+which occured due to lru\_cache. It's an interesting read. Do check it
+out.
